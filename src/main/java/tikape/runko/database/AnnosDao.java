@@ -24,7 +24,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     @Override
     public Annos findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos WHERE id = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -49,22 +49,22 @@ public class AnnosDao implements Dao<Annos, Integer> {
     public List<Annos> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos");
 
         ResultSet rs = stmt.executeQuery();
-        List<Annos> opiskelijat = new ArrayList<>();
+        List<Annos> annokset = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
             String nimi = rs.getString("nimi");
 
-            opiskelijat.add(new Annos(id, nimi));
+            annokset.add(new Annos(id, nimi));
         }
 
         rs.close();
         stmt.close();
         connection.close();
 
-        return opiskelijat;
+        return annokset;
     }
 
     @Override

@@ -7,8 +7,12 @@
     </head>
 
     <body>
-        <h1>Hei <span th:text="${opiskelija.nimi}">opiskelija</span>!</h1>
+        <h1>Smoothie-annokset!</h1>
 
-        <p>Olet saapunut opiskelijan <span th:text="${opiskelija.nimi}">opiskelija</span> henkilökohtaiselle sivulle.</p>
+        <ol>
+            <li th:each="annos: ${annokset}">
+                <span th:text="${annos.nimi}">annoksen nimi</span> <a th:href="${'/annokset/' + annos.id}">linkki</a>
+            </li>
+        </ol>
     </body>
 </html>
