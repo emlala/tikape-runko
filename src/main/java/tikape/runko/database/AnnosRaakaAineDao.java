@@ -82,4 +82,9 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public void delete(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine ar) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

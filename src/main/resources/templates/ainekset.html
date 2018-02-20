@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Raaka-aineet</title>
+    </head>
+    <body>
+        <h2>Raaka-aineet</h2>
+
+        <ol>
+            <li th:each="aines: ${ainekset}">
+                <span th:text="${aines.nimi}"></span> <a th:href="${'/ainekset/' + aines.id}">siirry</a>
+                (<a href="aines.id/poista">poista</a>)
+            </li>
+        </ol>
+        
+        <h4>Lisää uusi raaka-aine</h4>
+
+        <form method="POST" action="">
+            Raaka-aineen nimi:<br/>
+            <input type="text" name="aine"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+
+        <ul>
+            <li>
+                <a href="../">Smoothielistaukseen</a>
+            </li>
+        </ul>
+    </body>
+</html>
+

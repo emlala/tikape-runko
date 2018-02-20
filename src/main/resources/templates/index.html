@@ -7,10 +7,18 @@
     </head>
 
     <body>
-        <h1>Heissuli vei, Smoothieita jei!</h1>
+        <h2>Smoothiearkisto</h2>
+        
+        <ol>
+            <li th:each="annos: ${annokset}">
+                <span th:text="${annos.nimi}"></span> <a th:href="${'/annokset/' + annos.id}">siirry</a>
+            </li>
+        </ol>
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
+        <p>Tähän listaus kaikista smoothieista, sekä <span th:text="${viesti}">jotain?</span></p>
 
-        <p><a href="/annokset">Tästä annoslistaukseen.</a></p>
+        <p><a href="/annokset">Luo uusi smoothie!</a></p>
+        
+        <p><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></p>
     </body>
 </html>

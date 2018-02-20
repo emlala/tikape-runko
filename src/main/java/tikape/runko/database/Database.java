@@ -43,7 +43,10 @@ public class Database {
         lista.add("INSERT INTO Annos (nimi) VALUES ('Banaanismoothie');");
         lista.add("INSERT INTO Annos (nimi) VALUES ('Mansikkasmoothie');");
         lista.add("INSERT INTO Annos (nimi) VALUES ('Trooppinen smoothie');");
-
+        
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Banaani');");
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Mansikka');");
+        
         return lista;
     }
 }

@@ -72,4 +72,9 @@ public class AnnosDao implements Dao<Annos, Integer> {
         // ei toteutettu
     }
 
+    @Override
+    public Annos saveOrUpdate(Annos a) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
