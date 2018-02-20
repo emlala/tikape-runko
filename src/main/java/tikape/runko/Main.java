@@ -10,8 +10,8 @@ import tikape.runko.database.AnnosDao;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Database database = new Database("jdbc:sqlite:smoothiet.db;");
-//        database.init();
+        Database database = new Database("jdbc:sqlite:smoothiet.db");
+        database.init();
 
         AnnosDao annosDao = new AnnosDao(database);
 
