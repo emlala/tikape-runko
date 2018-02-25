@@ -2,53 +2,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Lisää smoothie</title>
         <meta charset="utf-8" />
     </head>
-
     <body>
         <h2>Smoothie-annokset!</h2>
 
         <ol>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}"></span> <a th:href="${'/annokset/' + annos.id}">siirry</a>
-                (<a href="annos.id/poista">poista</a>)
+                <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
+                <a th:href="${annos.id + '/poista'}"> (poista)</a>
             </li>
         </ol>
-        
+
         <h4>Lisää uusi</h4>
 
         <form method="POST" action="">
             Smoothien nimi:<br/>
-            <input type="text" name="aine"/><br/>
+            <input type="text" name="annos" required=""/><br/>
             <input type="submit" value="Lisää"/>
         </form>
-        
+
+
         <form method="POST" action="">
             Smoothien nimi:<br/>
-            <select name="smoothie">
-                <option name="3">valitse </option>
-                <option name="2">Banaanismoothie</option>
-                <option name="1">Mansikkasmoothie</option>
+            <select name="smoothie" required="">
+                <option th:each="annos: ${annokset}" th:text="${annos.nimi}"></option>
             </select>
             <br/>
+
             Lisättävä raaka-aine<br/>
-            <select name="raakaAine">
-                <option name="1">Appelsiini</option>
-                <option name="2">Banaani</option>
-                <option name="...">...</option>
+
+            <!--tällä tavalla listattuna ei näy mitään-->
+            <select name="raakaAine" required="">
+                <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
             </select>
             <br/>
+
             Järjestys<br/>
-            <input type="text"/><br/>
+            <input type="text" name="järjestys" required=""/><br/>
+
             Määrä<br/>
-            <input type="text"/><br/>
+            <input type="text" name="määrä" required=""/><br/>
+
             Ohje<br/>
-            <input type="text"/><br/>
+            <input type="text" name="ohje" required=""/><br/>
             <input type="submit" value="Lisää"/>
         </form>
-        
+
         <p><a href="../">Takaisin listaukseen</a></p>
-        
+
     </body>
 </html>

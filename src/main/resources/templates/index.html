@@ -2,23 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Smoothiearkisto</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
         <h2>Smoothiearkisto</h2>
-        
+
         <ol>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}"></span> <a th:href="${'/annokset/' + annos.id}">siirry</a>
+                <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
             </li>
         </ol>
 
         <p>Tähän listaus kaikista smoothieista, sekä <span th:text="${viesti}">jotain?</span></p>
 
         <p><a href="/annokset">Luo uusi smoothie!</a></p>
-        
+
         <p><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></p>
     </body>
 </html>

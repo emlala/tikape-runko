@@ -9,6 +9,8 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.AnnosDao;
 import tikape.runko.database.RaakaAineDao;
+import tikape.runko.domain.Annos;
+import tikape.runko.domain.AnnosRaakaAine;
 import tikape.runko.domain.RaakaAine;
 
 public class Main {
@@ -49,12 +51,43 @@ public class Main {
         }, new ThymeleafTemplateEngine());
         
         
-//        List<RaakaAine> aineet = new ArrayList<>(); //ihan vaan indeksöintiä varten
         post("/ainekset", (req, res) -> {
             RaakaAine uusi = new RaakaAine(null, req.queryParams("aine"), new ArrayList<>());
-//            aineet.add(uusi);
             ainesDao.saveOrUpdate(uusi);
             res.redirect("/ainekset");
+            return "";
+        });
+        
+        post("/annokset", (req, res) -> {
+            Annos uusi = new Annos(null, req.queryParams("annos"), new ArrayList<>());
+            annosDao.saveOrUpdate(uusi);
+            res.redirect("/annokset");
+            return "";
+        });
+        
+        
+        post("/annokset", (req, res) -> {
+            ArrayList<AnnosRaakaAine> aineet = new ArrayList<>();
+            RaakaAine aines = new RaakaAine(null, req.queryParams("raakaAine"), new ArrayList<>());
+            
+            Annos annos = new Annos(null, req.queryParams("smoothie"), aineet);
+            
+            AnnosRaakaAine uusi = new AnnosRaakaAine(null, aines,
+                    annos, req.queryParams("määrä"), req.queryParams("ohje"));
+            
+            ArrayList<AnnosRaakaAine> ls = annos.getRaakaAineitaAnnoksessa();
+            ls.add(uusi);
+            ArrayList<AnnosRaakaAine> l = aines.getRaakaAineitaAnnoksessa();
+            l.add(uusi);
+            
+            annos.setRaakaAineitaAnnoksessa(ls);
+            aines.setRaakaAineitaAnnoksessa(l);
+            
+            annosDao.saveOrUpdate(annos);
+            ainesDao.saveOrUpdate(aines);
+
+                    
+            res.redirect("/annokset");
             return "";
         });
     }

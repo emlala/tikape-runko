@@ -3,22 +3,23 @@
 
     <head>
         <title>Raaka-aineet</title>
+        <meta charset="utf-8" />
     </head>
     <body>
         <h2>Raaka-aineet</h2>
 
         <ol>
             <li th:each="aines: ${ainekset}">
-                <span th:text="${aines.nimi}"></span> <a th:href="${'/ainekset/' + aines.id}">siirry</a>
-                (<a href="aines.id/poista">poista</a>)
+                <span th:text="${aines.nimi}"></span>
+                <a th:href="${aines.id + '/poista'}"> (poista)</a>
             </li>
         </ol>
-        
+
         <h4>Lisää uusi raaka-aine</h4>
 
         <form method="POST" action="">
             Raaka-aineen nimi:<br/>
-            <input type="text" name="aine"/><br/>
+            <input type="text" name="aine" required=""/><br/>
             <input type="submit" value="Lisää"/>
         </form>
 
