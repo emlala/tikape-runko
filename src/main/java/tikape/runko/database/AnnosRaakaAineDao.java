@@ -28,48 +28,13 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     @Override
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
-//        Connection connection = database.getConnection();
-//        PreparedStatement stmt = connection.prepareStatement(
-//                "SELECT Annos.id AS annos, RaakaAine.nimi AS raakaAine "
-//                        + "FROM Annos, AnnosRaakaAine, RaakaAine "
-//                        + "WHERE Annos.id = ? "
-//                        + "AND AnnosRaakaAine.annos_id = Annos.id "
-//                        + "AND AnnosRaakaAine.raakaAine_id = raakaAine.id ");
-//        stmt.setObject(1, key);
-//
-//        ResultSet rs = stmt.executeQuery();
-//        boolean hasOne = rs.next();
-//        if (!hasOne) {
-//            return null;
-//        }
-//
-//        Integer id = rs.getInt("raakaAine_id");
-//        String nimi = rs.getString("nimi");
-//        Integer annosId = rs.getInt("annos_id");
-//
-//        Annos o = new Annos(id, nimi, annosId,);
-//
-//        rs.close();
-//        stmt.close();
-//        connection.close();
-//
-//        return o;
     }
 
     @Override
     public List<AnnosRaakaAine> findAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-//        List<AnnosRaakaAine> annosainekset = new ArrayList<>();
-//
-//        try (Connection conn = database.getConnection();
-//                ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM RaakaAine").executeQuery()) {
-//            while (rs.next()) {
-//                annosainekset.add(new AnnosRaakaAine(rs.getInt("id"), rs.getString("nimi")));
-//            }
-//        }
-//        return annosainekset;
-//    }
+
 
     @Override
     public void delete(Integer key) throws SQLException {
