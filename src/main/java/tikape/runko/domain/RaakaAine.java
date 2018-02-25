@@ -15,8 +15,12 @@ public class RaakaAine {
     private Integer id;
     private String nimi;
     private ArrayList<AnnosRaakaAine> raakaAineitaAnnoksessa;
-    
 
+    public RaakaAine(Integer id, String nimi) {
+        this.id = id;
+        this.nimi = nimi;
+    }
+    
     public RaakaAine(Integer id, String nimi, ArrayList<AnnosRaakaAine> raakaAineitaAnnoksessa) {
         this.id = id;
         this.nimi = nimi;

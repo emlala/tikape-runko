@@ -11,15 +11,17 @@ package tikape.runko.domain;
  */
 public class AnnosRaakaAine {
     private Integer id;
-    private RaakaAine raakaAine;
-    private Annos annos;   
+    private Integer annosId;
+    private Integer raakaAineId;
+    private Integer jarjestys;
     private String maara;
     private String ohje;
     
-    public AnnosRaakaAine(Integer id, RaakaAine raakaAine, Annos annos, String maara, String ohje) {
+    public AnnosRaakaAine(Integer id, Integer annosId, Integer raakaAineId, Integer jarj, String maara, String ohje) {
         this.id = id;
-        this.raakaAine = raakaAine;
-        this.annos = annos;
+        this.annosId = annosId;
+        this.raakaAineId = raakaAineId;
+        this.jarjestys = jarj;
         this.maara = maara;
         this.ohje = ohje;
     }
@@ -30,18 +32,28 @@ public class AnnosRaakaAine {
     public void setId(Integer id) {
         this.id = id;
     }
-    public RaakaAine getRaakaAine() {
-        return this.raakaAine;
+    
+    public Integer getRaakaAineId() {
+        return this.raakaAineId;
     }
-    public void setRaakaAine(RaakaAine raakaAine) {
-        this.raakaAine = raakaAine;
+    public void setRaakaAine(Integer raId) {
+        this.raakaAineId = raId;
     }
-    public Annos getAnnos() {
-        return this.annos;
+    public Integer getAnnosId() {
+        return this.annosId;
     }
-    public void setAnnos(Annos annos) {
-        this.annos = annos;
+    public void setAnnos(Integer annId) {
+        this.annosId = annId;
     }
+    
+    public Integer getJarjestys(){
+        return this.jarjestys;
+    }
+    
+    public void setJarjestys(Integer jarj){
+        this.jarjestys = jarj;
+    }
+    
     public String getMaara() {
         return this.maara;
     }
@@ -54,8 +66,5 @@ public class AnnosRaakaAine {
     public void setOhje(String ohje) {
         this.ohje = ohje;
     }
-    
-    
-    
-    
+ 
 }

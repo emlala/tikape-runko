@@ -2,36 +2,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Raaka-aineet</title>
+        <title>Tilastoja</title>
         <meta charset="utf-8" />
     </head>
-    <body>
-        <h3>Raaka-aineet</h3>
 
+    <body>
+        <h3>Tilastoja</h3>
+        
+        <p>Tällä sivulla voit tarkastella smoothieita raaka-aineiden mukaan.</p>
+        
+        <br/>
+        
+        <h4>Kaikki raaka-aineet:</h4>
         <ol>
             <li th:each="aines: ${ainekset}">
                 <span th:text="${aines.nimi}"></span>
                 <a th:href="${aines.id + '/poista'}"> (poista)</a>
             </li>
         </ol>
-
-        <br/>
-        <h4>Lisää uusi raaka-aine</h4>
-
+        
+        <h4>Hae raaka-aineen perusteella:</h4>
         <form method="POST" action="">
-            Raaka-aineen nimi:<br/>
-            <input type="text" name="aine" required=""/><br/>
-            <input type="submit" value="Lisää"/>
+            <select name="haettava" required="">
+                <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
+            </select>
+            <input type="submit" value="Hae"/>
+
         </form>
+        
+        
 
         <ul>
-            <li>
-                <a href="/annokset">Lisää smoothieen!</a>
-            </li>
             <li>
                 <a href="../">Smoothielistaukseen</a>
             </li>
         </ul>
+        
+
     </body>
 </html>
-

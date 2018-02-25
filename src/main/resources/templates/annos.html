@@ -7,24 +7,26 @@
     </head>
 
     <body>
-        <h2>Smoothie-annos nimeltä <span th:text="${annos.nimi}">annos</span>!</h2>
+        <h3>Smoothie-annos nimeltä <span th:text="${annos.nimi}">annos</span>!</h3>
 
         <p>Olet saapunut annoksen <span th:text="${annos.nimi}">annos</span> omalle sivulle. 
-        Sivulla luettelo smoothien raaka-aineista sekä ohje.</p>
+        Sivulla luettelo smoothien raaka-aineista sekä ohjeita.</p>
         
         <br/>
          
         <h4>Raaka-aineet:</h4><br/>
         
         <ol>
-            <li th:each="ainesosa: ${annos.raakaAineitaAnnoksessa}">
-                <span th:text="${ainesosa.nimi}"></span>
+            <li th:each="aines: ${ainekset}">
+                <span th:text="${aines.nimi}"></span>
             </li>
         </ol>
-        
-        <p><a href="/annokset">Takaisin listaukseen/muokkaa smoothieta</a></p>
 
-        
+        <ul>
+            <li>
+                <a href="/annokset">Takaisin listaukseen/muokkaa smoothieta</a>
+            </li>
+        </ul>
         
             
     </body>

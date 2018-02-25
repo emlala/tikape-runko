@@ -47,23 +47,15 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
     @Override
     public List<Annos> findAll() throws SQLException {
-
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos");
-
-        ResultSet rs = stmt.executeQuery();
         List<Annos> annokset = new ArrayList<>();
-        while (rs.next()) {
-            Integer id = rs.getInt("id");
-            String nimi = rs.getString("nimi");
+        
+        try(Connection conn = database.getConnection(); 
 
-            annokset.add(new Annos(id, nimi));
+        ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM Annos").executeQuery()){
+            while (rs.next()) {
+                annokset.add(new Annos(rs.getInt("id"), rs.getString("nimi")));
+            }
         }
-
-        rs.close();
-        stmt.close();
-        connection.close();
-
         return annokset;
     }
 
@@ -83,14 +75,13 @@ public class AnnosDao implements Dao<Annos, Integer> {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (nimi) VALUES (?)");
             stmt.setString(1, a.getNimi());
-            //raaka-aineita annoksessa?
             stmt.executeUpdate();
         }
 
         return findByName(a.getNimi());
     }
 
-    private Annos findByName(String nimi) throws SQLException {
+    public Annos findByName(String nimi) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT id, nimi FROM Annos WHERE nimi = ?");
             stmt.setString(1, nimi);
@@ -99,8 +90,8 @@ public class AnnosDao implements Dao<Annos, Integer> {
             if (!result.next()) {
                 return null;
             }
-
-            return new Annos(result.getInt("id"), result.getString("nimi"), new ArrayList<>());
+            
+            return new Annos(result.getInt("id"), result.getString("nimi"));
         }
     }    
 

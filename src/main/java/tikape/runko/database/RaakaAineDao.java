@@ -26,29 +26,16 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
 
     @Override
-    public RaakaAine findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<RaakaAine> findAll() throws SQLException {
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine");
-
-        ResultSet rs = stmt.executeQuery();
         List<RaakaAine> ainekset = new ArrayList<>();
-        while (rs.next()) {
-            Integer id = rs.getInt("id");
-            String nimi = rs.getString("nimi");
-            //mitä raakaAineen listaan tulee?
+        
+        try(Connection conn = database.getConnection(); 
 
-            ainekset.add(new RaakaAine(id, nimi, new ArrayList<>()));
+        ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM RaakaAine").executeQuery()){
+            while (rs.next()) {
+                ainekset.add(new RaakaAine(rs.getInt("id"), rs.getString("nimi")));
+            }
         }
-
-        rs.close();
-        stmt.close();
-        connection.close();
-
         return ainekset;
     }
 
@@ -68,14 +55,13 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
             stmt.setString(1, r.getNimi());
-            //raaka-aineita annoksessa?
             stmt.executeUpdate();
         }
 
         return findByName(r.getNimi());
     }
 
-    private RaakaAine findByName(String nimi) throws SQLException {
+    public RaakaAine findByName(String nimi) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT id, nimi FROM RaakaAine WHERE nimi = ?");
             stmt.setString(1, nimi);
@@ -85,8 +71,29 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
                 return null;
             }
 
-            return new RaakaAine(result.getInt("id"), result.getString("nimi"), new ArrayList<>());
+            return new RaakaAine(result.getInt("id"), result.getString("nimi"));
         }
+    }
+
+    public List<RaakaAine> findBySmoothie(Integer id) throws SQLException {
+        List<RaakaAine> ainekset = new ArrayList<>();
+        
+        try(Connection conn = database.getConnection(); 
+
+        ResultSet rs = conn.prepareStatement("SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
+                + "AnnosRaakaAine WHERE Annos.id = " + id + " "
+                + "AND Annos.id = AnnosRaakaAine.annos_id "
+                + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id").executeQuery()){
+            while (rs.next()) {
+                ainekset.add(new RaakaAine(rs.getInt("id"), rs.getString("nimi")));
+            }
+        }
+        return ainekset;
+    }
+    
+    @Override
+    public RaakaAine findOne(Integer key) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
  
 }

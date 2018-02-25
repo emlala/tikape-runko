@@ -7,18 +7,30 @@
     </head>
 
     <body>
-        <h2>Smoothiearkisto</h2>
-
+        <h3>Smoothiearkisto</h3>
+        <p>Tervetuloa smoothiearkistoomme! Sivustolla voit tarkastella jo olemassa
+            olevia reseptejä sekä luoda omia smoothieita.</p>
+        <br/>
+        
+        <h4> Smoothiet </h4>
         <ol>
             <li th:each="annos: ${annokset}">
                 <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
             </li>
         </ol>
 
-        <p>Tähän listaus kaikista smoothieista, sekä <span th:text="${viesti}">jotain?</span></p>
-
-        <p><a href="/annokset">Luo uusi smoothie!</a></p>
-
-        <p><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></p>
+        <br/>
+        
+        <ul>
+            <li>
+                <a href="/annokset">Luo uusi smoothie!</a>
+            </li>
+            <li>
+                <a href="/ainekset">Lisää ja muokkaa raaka-aineita</a>
+            </li>
+            <li>
+                <a href="/tilasto">Tarkastele smoothieita</a>
+            </li>
+        </ul>
     </body>
 </html>

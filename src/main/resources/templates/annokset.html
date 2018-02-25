@@ -6,7 +6,7 @@
         <meta charset="utf-8" />
     </head>
     <body>
-        <h2>Smoothie-annokset!</h2>
+        <h3>Smoothiet!</h3>
 
         <ol>
             <li th:each="annos: ${annokset}">
@@ -25,32 +25,40 @@
 
 
         <form method="POST" action="">
-            Smoothien nimi:<br/>
+            Valitse smoothie:<br/>
             <select name="smoothie" required="">
                 <option th:each="annos: ${annokset}" th:text="${annos.nimi}"></option>
             </select>
             <br/>
 
-            Lisättävä raaka-aine<br/>
-
-            <!--tällä tavalla listattuna ei näy mitään-->
+            Lisättävä raaka-aine:<br/>
             <select name="raakaAine" required="">
                 <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
             </select>
+            <ul>
+                <li>
+                    <a href="/ainekset">Puuttuuko raaka-aine?</a>
+                </li>
+            </ul>
             <br/>
 
-            Järjestys<br/>
-            <input type="text" name="järjestys" required=""/><br/>
+            Järjestys:<br/>
+            <input type="number" name="järjestys" required=""/><br/>
 
-            Määrä<br/>
+            Määrä:<br/>
             <input type="text" name="määrä" required=""/><br/>
 
-            Ohje<br/>
+            Ohje:<br/>
             <input type="text" name="ohje" required=""/><br/>
-            <input type="submit" value="Lisää"/>
+            <input type="submit" value="Luo"/>
         </form>
 
-        <p><a href="../">Takaisin listaukseen</a></p>
+        <ul>
+            <li>
+                <a href="../">Takaisin listaukseen</a>
+            </li>
+        </ul>
+        
 
     </body>
 </html>

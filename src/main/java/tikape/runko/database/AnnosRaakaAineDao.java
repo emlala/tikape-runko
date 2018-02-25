@@ -58,25 +58,18 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public List<AnnosRaakaAine> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
-//        Connection connection = database.getConnection();
-//        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine");
-//
-//        ResultSet rs = stmt.executeQuery();
-//        List<Annos> annokset = new ArrayList<>();
-//        while (rs.next()) {
-//            Integer id = rs.getInt("id");
-//            String nimi = rs.getString("nimi");
-//
-//            annokset.add(new Annos(id, nimi));
-//        }
-//
-//        rs.close();
-//        stmt.close();
-//        connection.close();
-//
-//        return annokset;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+//        List<AnnosRaakaAine> annosainekset = new ArrayList<>();
+//
+//        try (Connection conn = database.getConnection();
+//                ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM RaakaAine").executeQuery()) {
+//            while (rs.next()) {
+//                annosainekset.add(new AnnosRaakaAine(rs.getInt("id"), rs.getString("nimi")));
+//            }
+//        }
+//        return annosainekset;
+//    }
 
     @Override
     public void delete(Integer key) throws SQLException {
@@ -85,6 +78,21 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine ar) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                "INSERT INTO AnnosRaakaAine (annos_id, raakaAine_id, "
+                        + "jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, ar.getAnnosId());
+            stmt.setInt(2, ar.getRaakaAineId());
+            stmt.setInt(3, ar.getJarjestys());
+            stmt.setString(4, ar.getMaara());
+            stmt.setString(5, ar.getOhje());
+            
+            stmt.executeUpdate();
+        }
+
+        return null;
     }
+
 }
