@@ -96,5 +96,9 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
         return null;
     }
+    
+//    public List<Annos> findByIng(String ing){
+//        
+//    }
 
 }
