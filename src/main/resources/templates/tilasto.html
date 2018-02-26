@@ -17,18 +17,29 @@
         <ol>
             <li th:each="aines: ${ainekset}">
                 <span th:text="${aines.nimi}"></span>
-                <a th:href="${aines.id + '/poista'}"> (poista)</a>
             </li>
         </ol>
         
         <h4>Hae raaka-aineen perusteella:</h4>
-        <form method="POST" action="">
+        <form method="GET" action="/tilasto">
             <select name="haettava" required="">
                 <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
             </select>
-            <input type="submit" value="Hae"/>
-
+            <input type="submit" value="Hae"/>  
+            <ol>
+            <li th:each="smoothiet: ${smoothiet}">
+                
+            </li>
+        </ol>
         </form>
+        <!--<ol>
+            <li th:each="smoothiet: ${smoothiet}">
+                <span th:text="${smoothiet.id}"></span>
+            </li>
+        </ol>-->
+        
+        
+        
         
         
 

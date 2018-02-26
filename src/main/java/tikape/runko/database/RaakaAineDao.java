@@ -86,7 +86,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         }
     }
 
-    public List<RaakaAine> findBySmoothie(Integer id) throws SQLException {
+    public List<RaakaAine> findBySmoothieId(Integer id) throws SQLException {
         List<RaakaAine> ainekset = new ArrayList<>();
         
         try(Connection conn = database.getConnection(); 
