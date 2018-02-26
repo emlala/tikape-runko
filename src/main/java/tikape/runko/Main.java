@@ -74,7 +74,7 @@ public class Main {
         //raaka-aineen poistaminen 
         post("ainekset/:id/poista", (req, res) -> {
             
-            HashMap map = new HashMap<>();
+            
             ainesDao.delete(Integer.parseInt(req.params(":id")));
             res.redirect("/ainekset");
             
@@ -105,10 +105,10 @@ public class Main {
         });
         
         //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-//        post("/tilasto", (req, res) -> {
-//            ainesDao.findByName(req.queryParams("haettava"));
-//            res.redirect("/annokset");
-//            return "";
-//        });        
+        post("/tilasto", (req, res) -> {
+            ainesDao.findByName(req.queryParams("haettava"));
+            res.redirect("/annokset");
+            return "";
+        });        
     }
 }
