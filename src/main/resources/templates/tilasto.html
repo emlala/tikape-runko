@@ -17,7 +17,6 @@
         <ol>
             <li th:each="aines: ${ainekset}">
                 <span th:text="${aines.nimi}"></span>
-                <a th:href="${aines.id + '/poista'}"> (poista)</a>
             </li>
         </ol>
         
