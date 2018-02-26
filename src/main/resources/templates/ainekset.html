@@ -11,10 +11,12 @@
         <ol>
             <li th:each="aines: ${ainekset}">
                 <span th:text="${aines.nimi}"></span>
-                <a th:href="${aines.id + '/poista'}"> (poista)</a>
+                <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'> 
+                    <input type="submit" value="Poista"/>
+                </form>
             </li>
         </ol>
-
+        
         <br/>
         <h4>Lisää uusi raaka-aine</h4>
 
@@ -23,6 +25,11 @@
             <input type="text" name="aine" required=""/><br/>
             <input type="submit" value="Lisää"/>
         </form>
+        
+        
+            
+            
+        
 
         <ul>
             <li>

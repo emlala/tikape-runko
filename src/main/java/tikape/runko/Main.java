@@ -71,6 +71,16 @@ public class Main {
             res.redirect("/ainekset");
             return "";
         });
+        //raaka-aineen poistaminen 
+        post("ainekset/:id/poista", (req, res) -> {
+            
+            HashMap map = new HashMap<>();
+            ainesDao.delete(Integer.parseInt(req.params(":id")));
+            res.redirect("/ainekset");
+            
+            return "";
+        });
+        
      
         //smoothien lisääminen ja raaka-aineen lisääminen smoothieen
         post("/annokset", (req, res) -> {
