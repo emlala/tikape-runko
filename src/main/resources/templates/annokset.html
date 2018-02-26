@@ -11,7 +11,9 @@
         <ol>
             <li th:each="annos: ${annokset}">
                 <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
-                <a th:href="${annos.id + '/poista'}"> (poista)</a>
+                <form th:action="${'annokset/' + annos.id + '/poista'}" method='POST'> 
+                    <input type="submit" value="Poista"/>
+                </form>  
             </li>
         </ol>
 

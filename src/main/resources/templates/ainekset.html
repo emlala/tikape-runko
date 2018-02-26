@@ -11,33 +11,33 @@
         <ol>
             <li th:each="aines: ${ainekset}">
                 <span th:text="${aines.nimi}"></span>
-                                           
-<!--                <button onclick="confirmDelete()">Poista</button>-->
 
-<!--                <script>
-                function confrimDelete() {
-                    var txt;
-                    var r = confirm("Oletko varma, että haluat poistaa raaka-aineen?");
-                    if (r == true) {
-                        txt = "näkyyyy";
-                        <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'>                     
-                        </form>
-                    } else {
-                        txt = "Et poistanut raaka-ainetta.";
-                    }
-                }
-                
-                </script>-->
-                
-                
+                <!--                <button onclick="confirmDelete()">Poista</button>-->
+
+                <!--                <script>
+                                function confrimDelete() {
+                                    var txt;
+                                    var r = confirm("Oletko varma, että haluat poistaa raaka-aineen?");
+                                    if (r == true) {
+                                        txt = "näkyyyy";
+                                        <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'>                     
+                                        </form>
+                                    } else {
+                                        txt = "Et poistanut raaka-ainetta.";
+                                    }
+                                }
+                                
+                                </script>-->
+
+
 
                 <!--tässä alla on se toimiva tapa poistoon, mutta tässä ei mahdollisuutta varmistukseen, poistaa vaan suoraan:-->
-                    <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'> 
+                <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'> 
                     <input type="submit" value="Poista"/>
                 </form>                 
             </li>
         </ol>
-        
+
         <br/>
         <h4>Lisää uusi raaka-aine</h4>
 
@@ -46,11 +46,11 @@
             <input type="text" name="aine" required=""/><br/>
             <input type="submit" value="Lisää"/>
         </form>
-        
-        
-            
-            
-        
+
+
+
+
+
 
         <ul>
             <li>

@@ -44,7 +44,7 @@ public class Main {
         get("/annokset/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annos", annosDao.findOne(Integer.parseInt(req.params(":id"))));
-            map.put("ainekset", ainesDao.findBySmoothie(Integer.parseInt(req.params(":id"))));
+            map.put("ainekset", ainesDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
 
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
@@ -81,6 +81,15 @@ public class Main {
             return "";
         });
         
+        post("annokset/:id/poista", (req, res) -> {
+            
+            
+            annosDao.delete(Integer.parseInt(req.params(":id")));
+            res.redirect("/annokset");
+            
+            return "";
+        });
+        
      
         //smoothien lisääminen ja raaka-aineen lisääminen smoothieen
         post("/annokset", (req, res) -> {
@@ -105,10 +114,10 @@ public class Main {
         });
         
         //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-        post("/tilasto", (req, res) -> {
-            ainesDao.findByName(req.queryParams("haettava"));
-            res.redirect("/annokset");
-            return "";
-        });        
-    }
+//        post("/tilasto", (req, res) -> {
+//            annosRaakaAineDao.findByIng(req.queryParams("haettava"));
+//            res.redirect("/annokset");
+//            return "";
+//        });        
+    } 
 }
