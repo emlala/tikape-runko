@@ -120,21 +120,28 @@ public class Main {
             return "";
         });        
     
-        get("/tilasto", (Request req, Response res) -> {
-            ainesDao.findByName(req.queryParams("haettava"));
+        post("/tilasto", (Request req, Response res) -> {
+            if(req.queryParams("haettava") != null){
 
-            Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
+                ainesDao.findByName(req.queryParams("haettava"));
 
-            List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
-            List<Annos> smoothiet = new ArrayList<>();
-            for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
-                if (a.getRaakaAineId() == haettavanId) {
-                    smoothiet.add(annosDao.findOne(haettavanId));
+                Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
+
+                List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
+                List<Annos> smoothiet = new ArrayList<>();
+                for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
+                    if (a.getRaakaAineId() == haettavanId) {
+                        smoothiet.add(annosDao.findOne(haettavanId));
+                    }
                 }
+                HashMap map = new HashMap<>();
+                map.put("smoothiet", smoothiet);
+                return new ModelAndView(map, "/tilasto");
+                
+            }else{
+                res.redirect("/tilasto");
+                return "";
             }
-            HashMap map = new HashMap<>();
-            map.put("smoothiet", smoothiet);
-            return new ModelAndView(map, "/tilasto");
 
             //return "";
         });
