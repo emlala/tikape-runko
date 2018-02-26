@@ -17,6 +17,7 @@ import tikape.runko.domain.RaakaAine;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        staticFileLocation("/public");
         Database database = new Database("jdbc:sqlite:smoothiet.db");
         database.init();
 
