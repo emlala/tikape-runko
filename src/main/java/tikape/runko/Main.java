@@ -57,6 +57,7 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("annos", annosDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("ainekset", ainesDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
+            map.put("annosAineet", annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
 
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
@@ -77,13 +78,13 @@ public class Main {
         }, new ThymeleafTemplateEngine());
         
         //näytä raaka-ainekohtaiset smoothiet
-        //get("/tilasto/:id", (req, res) -> {
-        //    HashMap map = new HashMap<>();
-        //    map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
-        //    map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
+        get("/tilasto/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
+            map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
 
-        //    return new ModelAndView(map, "aines");
-       // }, new ThymeleafTemplateEngine());
+            return new ModelAndView(map, "ainesosa");
+        }, new ThymeleafTemplateEngine());
 
         //raaka-aineen lisääminen
         post("/ainekset", (req, res) -> {
@@ -180,7 +181,7 @@ public class Main {
             //map.put("annokset", annosDao.findAll());
             
 
-            return new ModelAndView(map, "smoothiet");
+            return new ModelAndView(map, "ainesosa");
         }, new ThymeleafTemplateEngine());
     }
 

@@ -91,7 +91,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         
         try(Connection conn = database.getConnection(); 
 
-        ResultSet rs = conn.prepareStatement("SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
+        ResultSet rs = conn.prepareStatement("SELECT DISTINCT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
                 + "AnnosRaakaAine WHERE Annos.id = " + id + " "
                 + "AND Annos.id = AnnosRaakaAine.annos_id "
                 + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id").executeQuery()){
