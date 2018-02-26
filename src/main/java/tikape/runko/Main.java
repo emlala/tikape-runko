@@ -114,10 +114,10 @@ public class Main {
         });
         
         //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-//        post("/tilasto", (req, res) -> {
-//            annosRaakaAineDao.findByIng(req.queryParams("haettava"));
-//            res.redirect("/annokset");
-//            return "";
-//        });        
+        post("/tilasto", (req, res) -> {
+            ainesDao.findByName(req.queryParams("haettava"));
+            res.redirect("/tilasto");
+            return "";
+        });        
     } 
 }
