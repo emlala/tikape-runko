@@ -107,7 +107,7 @@ public class Main {
         });
         
         //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-        get("tilasto/' + :haettava.nimi + '/tulokset'", (Request req, Response res) -> {
+        get("/tilasto", (Request req, Response res) -> {
             ainesDao.findByName(req.queryParams("haettava"));
             
             Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
@@ -123,7 +123,7 @@ public class Main {
             map.put("smoothiet", smoothiet);
             return new ModelAndView(map, "/tilasto");
             
-            //res.redirect("/tilasto");
+            
             //return "";
         });        
     }
