@@ -24,7 +24,7 @@ public class Main {
         staticFileLocation("/public");
         
         if (System.getenv("PORT") != null) {
-            Spark.port(Integer.valueOf(System.getenv("PORT")));
+            port(Integer.valueOf(System.getenv("PORT")));
         }
 
         Database database = new Database("jdbc:sqlite:smoothiet.db");
