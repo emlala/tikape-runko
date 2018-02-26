@@ -105,5 +105,20 @@ public class AnnosDao implements Dao<Annos, Integer> {
             return new Annos(result.getInt("id"), result.getString("nimi"));
         }
     }    
+    
+    public List<Annos> findByRaakaAineId(Integer id) throws SQLException {
+        List<Annos> annokset = new ArrayList<>();
+
+        try (Connection conn = database.getConnection();
+                ResultSet rs = conn.prepareStatement("SELECT Annos.id, Annos.nimi FROM RaakaAine, Annos, "
+                        + "AnnosRaakaAine WHERE RaakaAine.id = " + id + " "
+                        + "AND RaakaAine.id = AnnosRaakaAine.RaakaAine_id "
+                        + "AND Annos.id = AnnosRaakaAine.Annos_id").executeQuery()) {
+            while (rs.next()) {
+                annokset.add(new Annos(rs.getInt("id"), rs.getString("nimi")));
+            }
+        }
+        return annokset;
+    }
 
 }

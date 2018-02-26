@@ -66,6 +66,15 @@ public class Main {
 
             return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
+        
+        //näytä raaka-ainekohtaiset smoothiet
+        get("/tilasto/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
+            map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
+
+            return new ModelAndView(map, "aines");
+        }, new ThymeleafTemplateEngine());
 
         //raaka-aineen lisääminen
         post("/ainekset", (req, res) -> {

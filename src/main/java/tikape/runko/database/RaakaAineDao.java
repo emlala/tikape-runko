@@ -104,7 +104,26 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     
     @Override
     public RaakaAine findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer id = rs.getInt("id");
+        String nimi = rs.getString("nimi");
+
+        RaakaAine a = new RaakaAine(id, nimi);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return a;
     }
  
 }

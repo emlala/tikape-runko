@@ -16,7 +16,7 @@
         <h4>Kaikki raaka-aineet:</h4>
         <ol>
             <li th:each="aines: ${ainekset}">
-                <span th:text="${aines.nimi}"></span>
+                <a th:href="${'/tilasto/' + aines.id}"><span th:text="${aines.nimi}"></span></a>
             </li>
         </ol>
         
