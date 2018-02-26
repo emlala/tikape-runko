@@ -77,13 +77,13 @@ public class Main {
         }, new ThymeleafTemplateEngine());
         
         //näytä raaka-ainekohtaiset smoothiet
-        get("/tilasto/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
-            map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
+        //get("/tilasto/:id", (req, res) -> {
+        //    HashMap map = new HashMap<>();
+        //    map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
+        //    map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
 
-            return new ModelAndView(map, "aines");
-        }, new ThymeleafTemplateEngine());
+        //    return new ModelAndView(map, "aines");
+       // }, new ThymeleafTemplateEngine());
 
         //raaka-aineen lisääminen
         post("/ainekset", (req, res) -> {
@@ -163,6 +163,25 @@ public class Main {
 
             //return "";
         });
+        get("/ainesosa/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            //ainesDao.findOne(Integer.parseInt(req.params(":id")));
+            
+               List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
+                List<Annos> smoothiet = new ArrayList<>();
+                for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
+                    if (a.getRaakaAineId() == Integer.parseInt(req.params(":id"))) {
+                        smoothiet.add(annosDao.findOne(Integer.parseInt(req.params(":id"))));
+                    }
+                }
+                
+                map.put("smoothiet", smoothiet);
+            
+            //map.put("annokset", annosDao.findAll());
+            
+
+            return new ModelAndView(map, "smoothiet");
+        }, new ThymeleafTemplateEngine());
     }
 
 //        post("/tilasto", (req, res) -> {
