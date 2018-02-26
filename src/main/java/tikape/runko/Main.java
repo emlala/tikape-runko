@@ -6,6 +6,7 @@ import java.util.List;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
@@ -19,7 +20,15 @@ import tikape.runko.domain.RaakaAine;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        if (System.getenv("PORT") != null) {
+            Spark.port(Integer.valueOf(System.getenv("PORT")));
+        }
+        
+        // alla oleva määrittelee css-tiedoston sijainnin
         staticFileLocation("/public");
+        
+
         Database database = new Database("jdbc:sqlite:smoothiet.db");
         database.init();
 
