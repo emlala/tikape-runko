@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
@@ -105,10 +107,24 @@ public class Main {
         });
         
         //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-        post("/tilasto", (req, res) -> {
+        get("tilasto/' + :haettava.nimi + '/tulokset'", (Request req, Response res) -> {
             ainesDao.findByName(req.queryParams("haettava"));
-            res.redirect("/annokset");
-            return "";
+            
+            Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
+            
+            List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
+            List<Annos> smoothiet = new ArrayList<>();
+            for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
+                if (a.getRaakaAineId() == haettavanId) {
+                    smoothiet.add(annosDao.findOne(haettavanId));
+                }
+            }
+            HashMap map = new HashMap<>();
+            map.put("smoothiet", smoothiet);
+            return new ModelAndView(map, "/tilasto");
+            
+            //res.redirect("/tilasto");
+            //return "";
         });        
     }
 }

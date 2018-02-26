@@ -27,12 +27,49 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer id = rs.getInt("id");
+        Integer annosId = rs.getInt("annosId");
+        Integer raakaAineId = rs.getInt("raakaAineId");
+        Integer jarjestys = rs.getInt("jarjestys");
+        String maara = rs.getString("maara");
+        String ohje = rs.getString("ohje");
+
+        AnnosRaakaAine o = new AnnosRaakaAine(id, annosId, raakaAineId, jarjestys, maara, ohje);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return o;
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public List<AnnosRaakaAine> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AnnosRaakaAine> annosRaakaAineet = new ArrayList<>();
+        
+        try(Connection conn = database.getConnection(); 
+
+        ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM AnnosRaakaAine").executeQuery()){
+            while (rs.next()) {
+                annosRaakaAineet.add(new AnnosRaakaAine(rs.getInt("id"), rs.getInt("annosId"), rs.getInt("raakaAineId"),
+                rs.getInt("jarjestys"), rs.getString("maara"), rs.getString("ohje")));
+                //this.id = id;
+        
+            }
+        }
+        return annosRaakaAineet;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

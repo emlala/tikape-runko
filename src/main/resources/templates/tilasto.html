@@ -22,13 +22,20 @@
         </ol>
         
         <h4>Hae raaka-aineen perusteella:</h4>
-        <form method="POST" action="">
+        <form method="GET" action="'tilasto/' + haettava.nimi + '/tulokset'">
             <select name="haettava" required="">
                 <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
             </select>
-            <input type="submit" value="Hae"/>
-
+            <input type="submit" value="Hae"/>        
         </form>
+        <ol>
+            <li th:each="smoothiet: ${smoothiet}">
+                <span th:text="${smoothiet.id}"></span>
+            </li>
+        </ol>
+        
+        
+        
         
         
 
