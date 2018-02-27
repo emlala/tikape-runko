@@ -121,5 +121,14 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         }
         return ainekset;
     } 
+        public String raakaAineenNimi(Integer id) {
+            List<AnnosRaakaAine> ainekset = new ArrayList<>();       
+            
+                try {
+                    Connection conn = database.getConnection();
+                } catch (Exception e) {
+                }
+        }
+        return "";
 
 }

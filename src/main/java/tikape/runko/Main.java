@@ -133,61 +133,35 @@ public class Main {
         });
 
         //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-        post("/tilasto", (req, res) -> {
-            ainesDao.findByName(req.queryParams("haettava"));
-            res.redirect("/tilasto");
-            return "";
-        });        
+        //post("/tilasto", (req, res) -> {
+        //    ainesDao.findByName(req.queryParams("haettava"));
+        //    res.redirect("/tilasto");
+        //    return "";
+        //});        
     
-        post("/tilasto", (Request req, Response res) -> {
-            if(req.queryParams("haettava") != null){
+        //post("/tilasto", (Request req, Response res) -> {
+         //   if(req.queryParams("haettava") != null){
 
-                ainesDao.findByName(req.queryParams("haettava"));
+         //       ainesDao.findByName(req.queryParams("haettava"));
 
-                Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
+         //       Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
 
-                List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
-                List<Annos> smoothiet = new ArrayList<>();
-                for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
-                    if (a.getRaakaAineId() == haettavanId) {
-                        smoothiet.add(annosDao.findOne(haettavanId));
-                    }
-                }
-                HashMap map = new HashMap<>();
-                map.put("smoothiet", smoothiet);
-                return new ModelAndView(map, "/tilasto");
+         //       List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
+           //     List<Annos> smoothiet = new ArrayList<>();
+          //      for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
+           //         if (a.getRaakaAineId() == haettavanId) {
+           //             smoothiet.add(annosDao.findOne(haettavanId));
+           //         }
+           //     }
+           //     HashMap map = new HashMap<>();
+           //     map.put("smoothiet", smoothiet);
+           //     return new ModelAndView(map, "/tilasto");
                 
-            }else{
-                res.redirect("/tilasto");
-                return "";
-            }
+          //  }else{
+            //    res.redirect("/tilasto");
+           //     return "";
+          //  }
 
-            //return "";
-        });
-        get("/ainesosa/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            //ainesDao.findOne(Integer.parseInt(req.params(":id")));
-            
-               List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
-                List<Annos> smoothiet = new ArrayList<>();
-                for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
-                    if (a.getRaakaAineId() == Integer.parseInt(req.params(":id"))) {
-                        smoothiet.add(annosDao.findOne(Integer.parseInt(req.params(":id"))));
-                    }
-                }
-                
-                map.put("smoothiet", smoothiet);
-            
-            //map.put("annokset", annosDao.findAll());
-            
-
-            return new ModelAndView(map, "ainesosa");
-        }, new ThymeleafTemplateEngine());
-    }
-
-//        post("/tilasto", (req, res) -> {
-//            annosRaakaAineDao.findByIng(req.queryParams("haettava"));
-//            res.redirect("/annokset");
-//            return "";
-//        });       
+       // });       
+    }               
 }
