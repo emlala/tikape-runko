@@ -21,6 +21,7 @@
 
             <li th:each="ar: ${annosAineet}">
                 <!--PITÄISI OLLA NIMI EIKÄ ID:-->
+                <span th:text="${ar.nimi}"></span> - 
                 <span th:text="${ar.id}"></span> - 
                 
                 <!--PITÄISI OLLA JÄRJ MUKAAN JÄRJESTYKSESSÄ:-->

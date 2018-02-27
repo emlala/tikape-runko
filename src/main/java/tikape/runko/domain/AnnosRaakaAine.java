@@ -11,19 +11,21 @@ package tikape.runko.domain;
  */
 public class AnnosRaakaAine {
     private Integer id;
+    private String nimi;
     private Integer annosId;
     private Integer raakaAineId;
     private Integer jarjestys;
     private String maara;
     private String ohje;
     
-    public AnnosRaakaAine(Integer id, Integer annosId, Integer raakaAineId, Integer jarj, String maara, String ohje) {
+    public AnnosRaakaAine(Integer id, String nimi, Integer annosId, Integer raakaAineId, Integer jarj, String maara, String ohje) {
         this.id = id;
+        this.nimi = "nimi";
         this.annosId = annosId;
         this.raakaAineId = raakaAineId;
         this.jarjestys = jarj;
         this.maara = maara;
-        this.ohje = ohje;        
+        this.ohje = ohje;       
     }
     
     public Integer getId() {
@@ -69,6 +71,14 @@ public class AnnosRaakaAine {
     public int compareTo(AnnosRaakaAine compared) {
         int compareJarjestys=((AnnosRaakaAine)compared).getJarjestys();
         return this.jarjestys-compared.getJarjestys();
+    }
+    
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+    
+    public String getNimi() {
+        return this.nimi;
     }
  
 }

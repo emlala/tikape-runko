@@ -21,12 +21,12 @@ import tikape.runko.domain.RaakaAine;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        // asetetaan portti jos heroku antaa PORT-ympÃ¤ristÃ¶muuttujan
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
         
-        // alla oleva määrittelee css-tiedoston sijainnin
+        // alla oleva mÃ¤Ã¤rittelee css-tiedoston sijainnin
         staticFileLocation("/public");
         
 
@@ -37,7 +37,7 @@ public class Main {
         RaakaAineDao ainesDao = new RaakaAineDao(database);
         AnnosRaakaAineDao annosRaakaAineDao = new AnnosRaakaAineDao(database);
 
-        //datan lisääminen sivuille, joilla sitä tarvitaan
+        //datan lisÃ¤Ã¤minen sivuille, joilla sitÃ¤ tarvitaan
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annokset", annosDao.findAll());
@@ -53,13 +53,13 @@ public class Main {
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
         
-        //näytä smoothiekohtaiset ainesosat
+        //nÃ¤ytÃ¤ smoothiekohtaiset ainesosat
         get("/annokset/:id", (Request req, Response res) -> {
             HashMap map = new HashMap<>();
             map.put("annos", annosDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("ainekset", ainesDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
             List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id")));
-            //Tämän listan voisi järjestää tässä järjestysnumeron mukaan
+            //TÃ¤mÃ¤n listan voisi jÃ¤rjestÃ¤Ã¤ tÃ¤ssÃ¤ jÃ¤rjestysnumeron mukaan
         
             //annosAineet.sort();
             map.put("annosAineet", annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
@@ -82,7 +82,7 @@ public class Main {
             return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
         
-        //näytä raaka-ainekohtaiset smoothiet
+        //nÃ¤ytÃ¤ raaka-ainekohtaiset smoothiet
         get("/tilasto/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
@@ -91,7 +91,7 @@ public class Main {
             return new ModelAndView(map, "ainesosa");
         }, new ThymeleafTemplateEngine());
 
-        //raaka-aineen lisääminen
+        //raaka-aineen lisÃ¤Ã¤minen
         post("/ainekset", (req, res) -> {
             RaakaAine uusi = new RaakaAine(null, req.queryParams("aine"));
             ainesDao.saveOrUpdate(uusi);
@@ -115,7 +115,7 @@ public class Main {
             return "";
         });
 
-        //smoothien lisääminen ja raaka-aineen lisääminen smoothieen
+        //smoothien lisÃ¤Ã¤minen ja raaka-aineen lisÃ¤Ã¤minen smoothieen
         post("/annokset", (req, res) -> {
 
             if (req.queryParams("annos") != null) {
@@ -126,9 +126,9 @@ public class Main {
                 Integer annosId = annosDao.findByName(req.queryParams("smoothie")).getId();
                 Integer ainesId = ainesDao.findByName(req.queryParams("raakaAine")).getId();
 
-                AnnosRaakaAine uusi = new AnnosRaakaAine(null, annosId,
-                        ainesId, Integer.parseInt(req.queryParams("järjestys")),
-                        req.queryParams("määrä"), req.queryParams("ohje"));
+                AnnosRaakaAine uusi = new AnnosRaakaAine(null, "nimi", annosId,
+                        ainesId, Integer.parseInt(req.queryParams("jÃ¤rjestys")),
+                        req.queryParams("mÃ¤Ã¤rÃ¤"), req.queryParams("ohje"));
 
                 annosRaakaAineDao.saveOrUpdate(uusi);
             }

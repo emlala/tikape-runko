@@ -45,7 +45,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         String maara = rs.getString("maara");
         String ohje = rs.getString("ohje");
 
-        AnnosRaakaAine o = new AnnosRaakaAine(id, annosId, raakaAineId, jarjestys, maara, ohje);
+        AnnosRaakaAine o = new AnnosRaakaAine(id, "nimi", annosId, raakaAineId, jarjestys, maara, ohje);
 
         rs.close();
         stmt.close();
@@ -63,7 +63,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
         ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM AnnosRaakaAine").executeQuery()){
             while (rs.next()) {
-                annosRaakaAineet.add(new AnnosRaakaAine(rs.getInt("id"), rs.getInt("annosId"), rs.getInt("raakaAineId"),
+                annosRaakaAineet.add(new AnnosRaakaAine(rs.getInt("id"), "nimi", rs.getInt("annosId"), rs.getInt("raakaAineId"),
                 rs.getInt("jarjestys"), rs.getString("maara"), rs.getString("ohje")));
                 //this.id = id;
         
@@ -106,20 +106,39 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         List<AnnosRaakaAine> ainekset = new ArrayList<>();
         
         try (Connection conn = database.getConnection(); 
-
-        ResultSet rs = conn.prepareStatement("SELECT DISTINCT AnnosRaakaAine.id, AnnosRaakaAine.annos_id, "
-                + "AnnosRaakaAine.raakaAine_id, AnnosRaakaAine.jarjestys, AnnosRaakaAine.maara, "
-                + "AnnosRaakaAine.ohje "
-                + "FROM AnnosRaakaAine, Annos, RaakaAine "
+    
+        ResultSet rs = conn.prepareStatement("SELECT DISTINCT AnnosRaakaAine.id, RaakaAine.nimi, "
+                + "AnnosRaakaAine.annos_id, AnnosRaakaAine.raakaAine_id, AnnosRaakaAine.jarjestys, "
+                + "AnnosRaakaAine.maara, AnnosRaakaAine.ohje "
+                + "FROM RaakaAine, AnnosRaakaAine, Annos "
                 + "WHERE Annos.id = " + id + " "
-                + "AND Annos.id = AnnosRaakaAine.annos_id ").executeQuery()){
+                + "AND Annos.id = AnnosRaakaAine.annos_id "
+                + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id;").executeQuery()){
             while (rs.next()) {
-                ainekset.add(new AnnosRaakaAine(rs.getInt("id"), rs.getInt("annos_id"), 
-                        rs.getInt("raakaAine_id"), rs.getInt("jarjestys"), 
-                        rs.getString("maara"), rs.getString("ohje")));
+                AnnosRaakaAine uusiRaakaAine = new AnnosRaakaAine(rs.getInt("id"), rs.getString("nimi"), rs.getInt("annos_id"), 
+                        rs.getInt("raakaAine_id"), rs.getInt("jarjestys"), rs.getString("maara"), rs.getString("ohje"));
+                uusiRaakaAine.setNimi(rs.getString("nimi"));
+                ainekset.add(uusiRaakaAine);
             }
         }
         return ainekset;
     } 
+        
+//    public List<AnnosRaakaAine> RaakaAineNimi(Integer id) throws SQLException {
+//        List<AnnosRaakaAine> nimet = new ArrayList<>();
+//        
+//        try (Connection conn = database.getConnection(); 
+//
+//        ResultSet rs = conn.prepareStatement("SELECT DISTINCT RaakaAine.nimi "
+//                + "FROM RaakaAine, AnnosRaakaAine, Annos "
+//                + "WHERE Annos.id = " + id 
+//                + "AND Annos.id = AnnosRaakaAine.annos_id "
+//                + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id;").executeQuery()){
+//            while (rs.next()) {
+//                nimet.add(rs)));
+//            }
+//        }
+//        return nimet;
+//    }
        
 }
