@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Ainesosa</title>
+        <meta charset="utf-8" />
+        <!--<link rel="stylesheet" type="text/css" href="ulkoasu.css" />-->
+    </head>
+
+    <body>
+        
+        <h3>Ainesosa nimeltä <span th:text="${aines.nimi}">aines</span>!</h3>
+
+        <p>Olet saapunut annoksen <span th:text="${aines.nimi}">aines</span> omalle sivulle. 
+        Sivulla luettelo smoothieista, jotka sisältävät sitä.</p>
+        
+        <br/>
+         
+        <h4>Smoothiet:</h4><br/>
+        
+        <ol>
+            <li th:each="annos: ${annokset}">
+                <span th:text="${annos.nimi}"></span>
+            </li>
+        </ol>
+
+        <ul>
+            <li>
+                <a href="/tilasto">Takaisin tilastoihin</a>
+            </li>
+            <li>
+                <a href="/">Takaisin listaukseen</a>
+            </li>
+        </ul>
+        
+            
+    </body>
+</html>

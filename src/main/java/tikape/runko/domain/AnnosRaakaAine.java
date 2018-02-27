@@ -23,7 +23,7 @@ public class AnnosRaakaAine {
         this.raakaAineId = raakaAineId;
         this.jarjestys = jarj;
         this.maara = maara;
-        this.ohje = ohje;
+        this.ohje = ohje;        
     }
     
     public Integer getId() {
@@ -65,6 +65,10 @@ public class AnnosRaakaAine {
     }
     public void setOhje(String ohje) {
         this.ohje = ohje;
+    }
+    public int compareTo(AnnosRaakaAine compared) {
+        int compareJarjestys=((AnnosRaakaAine)compared).getJarjestys();
+        return this.jarjestys-compared.getJarjestys();
     }
  
 }

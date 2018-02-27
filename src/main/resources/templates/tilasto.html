@@ -4,6 +4,7 @@
     <head>
         <title>Tilastoja</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="ulkoasu.css" />
     </head>
 
     <body>
@@ -16,11 +17,11 @@
         <h4>Kaikki raaka-aineet:</h4>
         <ol>
             <li th:each="aines: ${ainekset}">
-                <span th:text="${aines.nimi}"></span>
+                <a th:href="${'/tilasto/' + aines.id}"><span th:text="${aines.nimi}"></span></a>
             </li>
         </ol>
         
-        <h4>Hae raaka-aineen perusteella:</h4>
+        <!--<h4>Hae raaka-aineen perusteella:</h4>
         <form method="GET" action="/tilasto">
             <select name="haettava" required="">
                 <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
@@ -32,17 +33,12 @@
             </li>
         </ol>
         </form>
-        <!--<ol>
+        <ol>
             <li th:each="smoothiet: ${smoothiet}">
                 <span th:text="${smoothiet.id}"></span>
             </li>
         </ol>-->
-        
-        
-        
-        
-        
-
+       
         <ul>
             <li>
                 <a href="../">Smoothielistaukseen</a>

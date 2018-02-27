@@ -91,7 +91,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         
         try(Connection conn = database.getConnection(); 
 
-        ResultSet rs = conn.prepareStatement("SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
+        ResultSet rs = conn.prepareStatement("SELECT DISTINCT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
                 + "AnnosRaakaAine WHERE Annos.id = " + id + " "
                 + "AND Annos.id = AnnosRaakaAine.annos_id "
                 + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id").executeQuery()){
@@ -104,7 +104,26 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     
     @Override
     public RaakaAine findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer id = rs.getInt("id");
+        String nimi = rs.getString("nimi");
+
+        RaakaAine a = new RaakaAine(id, nimi);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return a;
     }
  
 }

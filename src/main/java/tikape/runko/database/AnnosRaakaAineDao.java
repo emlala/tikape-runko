@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Annos;
 import tikape.runko.domain.AnnosRaakaAine;
+import tikape.runko.domain.RaakaAine;
 
 /**
  *
@@ -100,5 +101,25 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 //    public List<Annos> findByIng(String ing){
 //        
 //    }
+    
+        public List<AnnosRaakaAine> findBySmoothieId(Integer id) throws SQLException {
+        List<AnnosRaakaAine> ainekset = new ArrayList<>();
+        
+        try (Connection conn = database.getConnection(); 
 
+        ResultSet rs = conn.prepareStatement("SELECT DISTINCT AnnosRaakaAine.id, AnnosRaakaAine.annos_id, "
+                + "AnnosRaakaAine.raakaAine_id, AnnosRaakaAine.jarjestys, AnnosRaakaAine.maara, "
+                + "AnnosRaakaAine.ohje "
+                + "FROM AnnosRaakaAine, Annos, RaakaAine "
+                + "WHERE Annos.id = " + id + " "
+                + "AND Annos.id = AnnosRaakaAine.annos_id ").executeQuery()){
+            while (rs.next()) {
+                ainekset.add(new AnnosRaakaAine(rs.getInt("id"), rs.getInt("annos_id"), 
+                        rs.getInt("raakaAine_id"), rs.getInt("jarjestys"), 
+                        rs.getString("maara"), rs.getString("ohje")));
+            }
+        }
+        return ainekset;
+    } 
+       
 }
