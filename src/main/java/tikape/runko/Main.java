@@ -1,6 +1,7 @@
 package tikape.runko;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import spark.ModelAndView;
@@ -51,12 +52,16 @@ public class Main {
 
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
-
+        
         //näytä smoothiekohtaiset ainesosat
-        get("/annokset/:id", (req, res) -> {
+        get("/annokset/:id", (Request req, Response res) -> {
             HashMap map = new HashMap<>();
             map.put("annos", annosDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("ainekset", ainesDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
+            List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id")));
+            //Tämän listan voisi järjestää tässä järjestysnumeron mukaan
+        
+            //annosAineet.sort();
             map.put("annosAineet", annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
 
             return new ModelAndView(map, "annos");
@@ -130,38 +135,6 @@ public class Main {
 
             res.redirect("/annokset");
             return "";
-        });
-
-        //smoothien haku raaka-aineen perusteella (ei toimi lähellekään)
-        //post("/tilasto", (req, res) -> {
-        //    ainesDao.findByName(req.queryParams("haettava"));
-        //    res.redirect("/tilasto");
-        //    return "";
-        //});        
-    
-        //post("/tilasto", (Request req, Response res) -> {
-         //   if(req.queryParams("haettava") != null){
-
-         //       ainesDao.findByName(req.queryParams("haettava"));
-
-         //       Integer haettavanId = ainesDao.findByName(req.queryParams("haettava")).getId();
-
-         //       List<AnnosRaakaAine> raakaAineetAnnoksissa = annosRaakaAineDao.findAll();
-           //     List<Annos> smoothiet = new ArrayList<>();
-          //      for (AnnosRaakaAine a : annosRaakaAineDao.findAll()) {
-           //         if (a.getRaakaAineId() == haettavanId) {
-           //             smoothiet.add(annosDao.findOne(haettavanId));
-           //         }
-           //     }
-           //     HashMap map = new HashMap<>();
-           //     map.put("smoothiet", smoothiet);
-           //     return new ModelAndView(map, "/tilasto");
-                
-          //  }else{
-            //    res.redirect("/tilasto");
-           //     return "";
-          //  }
-
-       // });       
+        });       
     }               
 }

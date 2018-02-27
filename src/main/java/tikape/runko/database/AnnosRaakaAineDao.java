@@ -105,7 +105,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         public List<AnnosRaakaAine> findBySmoothieId(Integer id) throws SQLException {
         List<AnnosRaakaAine> ainekset = new ArrayList<>();
         
-        try(Connection conn = database.getConnection(); 
+        try (Connection conn = database.getConnection(); 
 
         ResultSet rs = conn.prepareStatement("SELECT DISTINCT AnnosRaakaAine.id, AnnosRaakaAine.annos_id, "
                 + "AnnosRaakaAine.raakaAine_id, AnnosRaakaAine.jarjestys, AnnosRaakaAine.maara, "
@@ -121,14 +121,5 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         }
         return ainekset;
     } 
-        public String raakaAineenNimi(Integer id) {
-            List<AnnosRaakaAine> ainekset = new ArrayList<>();       
-            
-                try {
-                    Connection conn = database.getConnection();
-                } catch (Exception e) {
-                }
-        }
-        return "";
-
+       
 }
