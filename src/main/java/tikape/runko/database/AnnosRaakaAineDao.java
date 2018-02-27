@@ -70,7 +70,6 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
             }
         }
         return annosRaakaAineet;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -123,22 +122,5 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         }
         return ainekset;
     } 
-        
-//    public List<AnnosRaakaAine> RaakaAineNimi(Integer id) throws SQLException {
-//        List<AnnosRaakaAine> nimet = new ArrayList<>();
-//        
-//        try (Connection conn = database.getConnection(); 
-//
-//        ResultSet rs = conn.prepareStatement("SELECT DISTINCT RaakaAine.nimi "
-//                + "FROM RaakaAine, AnnosRaakaAine, Annos "
-//                + "WHERE Annos.id = " + id 
-//                + "AND Annos.id = AnnosRaakaAine.annos_id "
-//                + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id;").executeQuery()){
-//            while (rs.next()) {
-//                nimet.add(rs)));
-//            }
-//        }
-//        return nimet;
-//    }
        
 }
