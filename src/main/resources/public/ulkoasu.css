@@ -8,28 +8,101 @@ and open the template in the editor.
     Author     : Emmi
 */
 
+/* koko sivun taustan väri */
 body {
-    background-color: #FCDCDC;
+    background-color: #FFF8F6;
 }
 
-h3 {
+/* laatikko joka sisältää kaiken sivun sisällön */
+div.container {
+    width: 80%;
+    margin: auto;
+    background: #FFFFFF;
+}
+
+/* yläpalkki 
+border-radius määrittelee kulmien pyöristykset ja backgroundin linear-gradient määrittelee liukuvärin ja värisävyt*/
+
+header {
+    border-radius: 7px 7px 0px 0px;
+    padding: 1em;
+    color: white;
+    background: linear-gradient(to right, #FF6574, #FFE0BC);
+    clear: left;
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+    
+}
+
+/* alapalkki, tähän ei tarvitse laittaa sisältöä html-sivuilla, 
+mutta se on hyvä olla olemassa vaikka sitten tyhjänä ulkoasun takia */
+
+footer {
+    border-radius: 0px 0px 7px 7px;
+    padding: 1em;
+    color: white;
+    background: linear-gradient(to right, #FF6574, #FFE0BC);
+    clear: left;
+    text-align: center;
+}
+
+/* navigaatiopalkki, sen sisältämä lista (ul) ja listan sisältämät linkit (ul a) 
+*/
+
+nav {
+    float: left;
+    max-width: 200px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
+
+/* itse sisältölaatikko 
+jätin tähän vasemman reunaviivan jotta navin ja tämän välissä on raja, sitä voi muokata*/
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+
+/* tekstinmuotoilu, li viittaa listaan */
+
+p, li, h6, h3, h4 {
     color: #000000;
     margin-left: 20px;
-    font-family: sans-serif;
+    font-family: "Helvetica", sans-serif;
 }
 
-h4 {
-    color: #000000;
-    margin-left: 20px;
-    font-family: sans-serif;
+/* linkkien tekstimuotoilu 
+'text-decoration: none' poistaa linkkien alleviivaukset */
+
+a {
+    text-decoration: none;
 }
 
-p, li, h6 {
-    color: #000000;
-    margin-left: 20px;
-    font-family: sans-serif;
+a:link {
+    color: #C0004D;
 }
 
+a:visited {
+    color: #C0004D;
+}
+
+a:hover {
+    color: #F08873;
+}
+
+/* listojen pallurat */
 ul {
     list-style-type: circle;
 }

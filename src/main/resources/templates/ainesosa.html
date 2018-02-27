@@ -5,28 +5,98 @@
         <title>Ainesosa</title>
         <meta charset="utf-8" />
         <style>
+            /* koko sivun taustan väri */
             body {
-                background-color: #FCDCDC;
+                background-color: #FFF8F6;
             }
 
-            h3 {
+            /* laatikko joka sisältää kaiken sivun sisällön */
+            div.container {
+                width: 80%;
+                margin: auto;
+                background: #FFFFFF;
+            }
+
+            /* yläpalkki 
+            border-radius määrittelee kulmien pyöristykset ja backgroundin linear-gradient määrittelee liukuvärin ja värisävyt*/
+
+            header {
+                border-radius: 7px 7px 0px 0px;
+                padding: 1em;
+                color: white;
+                background: linear-gradient(to right, #FF6574, #FFE0BC);
+                clear: left;
+                text-align: center;
+                font-family: "Helvetica", sans-serif;
+
+            }
+
+            /* alapalkki, tähän ei tarvitse laittaa sisältöä html-sivuilla, 
+            mutta se on hyvä olla olemassa vaikka sitten tyhjänä ulkoasun takia */
+
+            footer {
+                border-radius: 0px 0px 7px 7px;
+                padding: 1em;
+                color: white;
+                background: linear-gradient(to right, #FF6574, #FFE0BC);
+                clear: left;
+                text-align: center;
+            }
+
+            /* navigaatiopalkki, sen sisältämä lista (ul) ja listan sisältämät linkit (ul a) 
+            */
+
+            nav {
+                float: left;
+                max-width: 200px;
+                margin: 0;
+                padding: 1em;
+                font-family: "Helvetica", sans-serif;
+            }
+
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            nav ul a {
+                text-decoration: none;
+            }
+
+            /* itse sisältölaatikko 
+            jätin tähän vasemman reunaviivan jotta navin ja tämän välissä on raja, sitä voi muokata*/
+
+            article {
+                margin-left: 170px;
+                border-left: 1px solid gray;
+                padding: 1em;
+                overflow: hidden;
                 color: #000000;
                 margin-left: 20px;
-                font-family: sans-serif;
+                font-family: "Helvetica", sans-serif;
             }
 
-            h4 {
-                color: #000000;
-                margin-left: 20px;
-                font-family: sans-serif;
+
+            /* linkkien tekstimuotoilu 
+            'text-decoration: none' poistaa linkkien alleviivaukset */
+
+            a {
+                text-decoration: none;
             }
 
-            p, li {
-                color: #000000;
-                margin-left: 20px;
-                font-family: sans-serif;
+            a:link {
+                color: #C0004D;
             }
 
+            a:visited {
+                color: #C0004D;
+            }
+
+            a:hover {
+                color: #F08873;
+            }
+
+            /* listojen pallurat */
             ul {
                 list-style-type: circle;
             }
@@ -34,31 +104,38 @@
     </head>
 
     <body>
-        
-        <h3>Ainesosa nimeltä <span th:text="${aines.nimi}">aines</span>!</h3>
+        <div class="container">
 
-        <p>Olet saapunut annoksen <span th:text="${aines.nimi}">aines</span> omalle sivulle. 
-        Sivulla luettelo smoothieista, jotka sisältävät sitä.</p>
-        
-        <br/>
-         
-        <h4>Smoothiet:</h4><br/>
-        
-        <ol>
-            <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}"></span>
-            </li>
-        </ol>
+            <header>
+                <h1>Ainesosa nimeltä <span th:text="${aines.nimi}">aines</span>!</h1>
+            </header>
 
-        <ul>
-            <li>
-                <a href="/tilasto">Takaisin tilastoihin</a>
-            </li>
-            <li>
-                <a href="/">Takaisin listaukseen</a>
-            </li>
-        </ul>
-        
-            
+            <nav>
+                <ul>
+                    <li><a href="../">Etusivu</a></li>
+                    <li><a href="/annokset">Luo uusi smoothie</a></li>
+                    <li><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></li>
+                    <li><a href="/tilasto">Tilastot</a></li>
+                </ul>
+
+            </nav>
+
+            <article>
+                <p>Olet saapunut annoksen <span th:text="${aines.nimi}">aines</span> omalle sivulle. 
+                    Sivulla luettelo smoothieista, jotka sisältävät sitä.</p>
+
+                <br/>
+
+                <h4>Smoothiet:</h4><br/>
+
+                <ol>
+                    <li th:each="annos: ${annokset}">
+                        <span th:text="${annos.nimi}"></span>
+                    </li>
+                </ol>
+
+            </article>
+            <footer><p>KEKS, 2018</p></footer>
+        </div>
     </body>
 </html>

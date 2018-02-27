@@ -5,28 +5,98 @@
         <title>Smoothie</title>
         <meta charset="utf-8" />
         <style>
+            /* koko sivun taustan väri */
             body {
-                background-color: #FCDCDC;
+                background-color: #FFF8F6;
             }
 
-            h3 {
+            /* laatikko joka sisältää kaiken sivun sisällön */
+            div.container {
+                width: 80%;
+                margin: auto;
+                background: #FFFFFF;
+            }
+
+            /* yläpalkki 
+            border-radius määrittelee kulmien pyöristykset ja backgroundin linear-gradient määrittelee liukuvärin ja värisävyt*/
+
+            header {
+                border-radius: 7px 7px 0px 0px;
+                padding: 1em;
+                color: white;
+                background: linear-gradient(to right, #FF6574, #FFE0BC);
+                clear: left;
+                text-align: center;
+                font-family: "Helvetica", sans-serif;
+
+            }
+
+            /* alapalkki, tähän ei tarvitse laittaa sisältöä html-sivuilla, 
+            mutta se on hyvä olla olemassa vaikka sitten tyhjänä ulkoasun takia */
+
+            footer {
+                border-radius: 0px 0px 7px 7px;
+                padding: 1em;
+                color: white;
+                background: linear-gradient(to right, #FF6574, #FFE0BC);
+                clear: left;
+                text-align: center;
+            }
+
+            /* navigaatiopalkki, sen sisältämä lista (ul) ja listan sisältämät linkit (ul a) 
+            */
+
+            nav {
+                float: left;
+                max-width: 200px;
+                margin: 0;
+                padding: 1em;
+                font-family: "Helvetica", sans-serif;
+            }
+
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            nav ul a {
+                text-decoration: none;
+            }
+
+            /* itse sisältölaatikko 
+            jätin tähän vasemman reunaviivan jotta navin ja tämän välissä on raja, sitä voi muokata*/
+
+            article {
+                margin-left: 170px;
+                border-left: 1px solid gray;
+                padding: 1em;
+                overflow: hidden;
                 color: #000000;
                 margin-left: 20px;
-                font-family: sans-serif;
+                font-family: "Helvetica", sans-serif;
             }
 
-            h4 {
-                color: #000000;
-                margin-left: 20px;
-                font-family: sans-serif;
+
+            /* linkkien tekstimuotoilu 
+            'text-decoration: none' poistaa linkkien alleviivaukset */
+
+            a {
+                text-decoration: none;
             }
 
-            p, li {
-                color: #000000;
-                margin-left: 20px;
-                font-family: sans-serif;
+            a:link {
+                color: #C0004D;
             }
 
+            a:visited {
+                color: #C0004D;
+            }
+
+            a:hover {
+                color: #F08873;
+            }
+
+            /* listojen pallurat */
             ul {
                 list-style-type: circle;
             }
@@ -34,39 +104,45 @@
     </head>
 
     <body>
-        <h3>Smoothie-annos nimeltä <span th:text="${annos.nimi}">annos</span>!</h3>
+        <div class="container">
+            <header>
+                <h1>Smoothie-annos nimeltä <span th:text="${annos.nimi}">annos</span>!</h1>
+            </header>
 
-        <p>Olet saapunut annoksen <span th:text="${annos.nimi}">annos</span> omalle sivulle. 
-            Sivulla luettelo smoothien raaka-aineista sekä ohjeita.</p>
+            <nav>
+                <ul>
+                    <li><a href="../">Etusivu</a></li>
+                    <li><a href="/annokset">Luo uusi smoothie</a></li>
+                    <li><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></li>
+                    <li><a href="/tilasto">Tilastot</a></li>
+                </ul>
+            </nav>
 
-        <br/>
+            <article>
+                <p>Olet saapunut annoksen <span th:text="${annos.nimi}">annos</span> omalle sivulle. 
+                    Sivulla luettelo smoothien raaka-aineista sekä ohjeita.</p>
 
-        <h4>Raaka-aineet:</h4><br/>
+                <br/>
 
-        <ul>
+                <h4>Raaka-aineet:</h4><br/>
 
-            <li th:each="ar: ${annosAineet}">
-                <span th:text="${ar.nimi}"></span> - 
-                <span th:text="${ar.id}"></span> - 
-                
-                <!--PITÄISI OLLA JÄRJ MUKAAN JÄRJESTYKSESSÄ:-->
-                <span th:text="${ar.jarjestys}"></span> - 
-                
-                <span th:text="${ar.maara}"></span> - 
-                <span th:text="${ar.ohje}"></span>
-            </li>
+                <ul>
 
-        </ul>
+                    <li th:each="ar: ${annosAineet}">
+                        <span th:text="${ar.nimi}"></span> - 
+                        <span th:text="${ar.id}"></span> - 
 
-        <ul>
-            <li>
-                <a href="/annokset">Muokkaa smoothieta</a>
-            </li>
-            <li>
-                <a href="/">Takaisin listaukseen</a>
-            </li>
-        </ul>
+                        <!--PITÄISI OLLA JÄRJ MUKAAN JÄRJESTYKSESSÄ:-->
+                        <span th:text="${ar.jarjestys}"></span> - 
+
+                        <span th:text="${ar.maara}"></span> - 
+                        <span th:text="${ar.ohje}"></span>
+                    </li>
+
+                </ul>
 
 
+            </article>
+        </div>
     </body>
 </html>
