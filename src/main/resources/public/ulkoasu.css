@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 
 /* koko sivun taustan väri */
+/* koko sivun taustan väri */
 body {
     background-color: #FFF8F6;
 }
@@ -31,7 +32,7 @@ header {
     clear: left;
     text-align: center;
     font-family: "Helvetica", sans-serif;
-    
+
 }
 
 /* alapalkki, tähän ei tarvitse laittaa sisältöä html-sivuilla, 
@@ -40,10 +41,11 @@ mutta se on hyvä olla olemassa vaikka sitten tyhjänä ulkoasun takia */
 footer {
     border-radius: 0px 0px 7px 7px;
     padding: 1em;
-    color: white;
+    color: #000000;
     background: linear-gradient(to right, #FF6574, #FFE0BC);
     clear: left;
     text-align: center;
+    font-family: "Helvetica", sans-serif;
 }
 
 /* navigaatiopalkki, sen sisältämä lista (ul) ja listan sisältämät linkit (ul a) 
@@ -54,13 +56,14 @@ nav {
     max-width: 200px;
     margin: 0;
     padding: 1em;
+    font-family: "Helvetica", sans-serif;
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
 }
-   
+
 nav ul a {
     text-decoration: none;
 }
@@ -73,15 +76,11 @@ article {
     border-left: 1px solid gray;
     padding: 1em;
     overflow: hidden;
-}
-
-/* tekstinmuotoilu, li viittaa listaan */
-
-p, li, h6, h3, h4 {
     color: #000000;
     margin-left: 20px;
     font-family: "Helvetica", sans-serif;
 }
+
 
 /* linkkien tekstimuotoilu 
 'text-decoration: none' poistaa linkkien alleviivaukset */
