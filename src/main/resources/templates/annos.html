@@ -130,9 +130,14 @@
                 <ol>
 
                     <li th:each="ar: ${annosAineet}">
-                        <span th:text="${ar.nimi} + ':'"></span> 
-                        <span th:text="${ar.maara} + ','"></span>  
-                        <span th:text="${ar.ohje}"></span>
+                        <span th:text="${ar.nimi} + ':'"></span>
+                        <ul>
+                            <li th:text="${ar.maara} + ', ' + ${ar.ohje}"> 
+                            </li>
+                        </ul>
+                        <form th:action="${ar.id + '/poista'}" method='POST'> 
+                            <input type="submit" value="Poista"/>
+                        </form> 
                     </li>
 
                 </ol>

@@ -103,7 +103,17 @@ public class Main {
 
             return "";
         });
+        
+        //raaka-aineen poistaminen annoksesta
+        post("annokset/:id/poista", (req, res) -> {
 
+            annosRaakaAineDao.delete(Integer.parseInt(req.params(":id")));
+            res.redirect("/");
+
+            return "";
+        });
+
+        //smoothien poistaminen
         post("annokset/:id/poista", (req, res) -> {
 
             annosDao.delete(Integer.parseInt(req.params(":id")));
