@@ -52,12 +52,8 @@
                         <select name="raakaAine" required="">
                             <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
                         </select>
-                        <ul>
-                            <li>
-                                <a href="/ainekset">Puuttuuko raaka-aine?</a>
-                            </li>
-                        </ul>
                     </p>
+                    <a href="/ainekset">Puuttuuko raaka-aine?</a>
 
                     <p>
                         Järjestys:<br/>

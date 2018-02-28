@@ -127,8 +127,8 @@ public class Main {
                 Integer ainesId = ainesDao.findByName(req.queryParams("raakaAine")).getId();
 
                 AnnosRaakaAine uusi = new AnnosRaakaAine(null, "nimi", annosId,
-                        ainesId, Integer.parseInt(req.queryParams("jÃ¤rjestys")),
-                        req.queryParams("mÃ¤Ã¤rÃ¤"), req.queryParams("ohje"));
+                        ainesId, Integer.parseInt(req.queryParams("järjestys")),
+                        req.queryParams("määrä"), req.queryParams("ohje"));
 
                 annosRaakaAineDao.saveOrUpdate(uusi);
             }
