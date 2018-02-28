@@ -23,24 +23,20 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
     @Override
     public Annos findOne(Integer key) throws SQLException {
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos WHERE id = ?");
-        stmt.setObject(1, key);
-
-        ResultSet rs = stmt.executeQuery();
-        boolean hasOne = rs.next();
-        if (!hasOne) {
-            return null;
+        Annos o;
+        try (Connection connection = database.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos WHERE id = ?");
+            stmt.setObject(1, key);
+            ResultSet rs = stmt.executeQuery();
+            boolean hasOne = rs.next();
+            if (!hasOne) {
+                return null;
+            }   Integer id = rs.getInt("id");
+            String nimi = rs.getString("nimi");
+            o = new Annos(id, nimi);
+            rs.close();
+            stmt.close();
         }
-
-        Integer id = rs.getInt("id");
-        String nimi = rs.getString("nimi");
-
-        Annos o = new Annos(id, nimi);
-
-        rs.close();
-        stmt.close();
-        connection.close();
 
         return o;
     }
@@ -61,17 +57,17 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Annos WHERE id = ?");
-        stmt.setInt(1, key);
-        stmt.executeUpdate();
-        PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE annos_id = ?");
-        stmt2.setInt(1, key);
-        stmt2.executeUpdate();
-
-        stmt.close();
-        stmt2.close();
-        conn.close();
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Annos WHERE id = ?");
+            stmt.setInt(1, key);
+            stmt.executeUpdate();
+            PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE annos_id = ?");
+            stmt2.setInt(1, key);
+            stmt2.executeUpdate();
+            
+            stmt.close();
+            stmt2.close();
+        }
 
     }
 

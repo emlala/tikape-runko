@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tikape.runko.domain.Annos;
 import tikape.runko.domain.RaakaAine;
 
 /**
@@ -41,17 +40,17 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
-        stmt.setInt(1, key);
-        stmt.executeUpdate();
-        PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE raakaAine_id = ?");
-        stmt2.setInt(1, key);
-        stmt2.executeUpdate();
-        
-        stmt.close();
-        stmt2.close();
-        conn.close();
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
+            stmt.setInt(1, key);
+            stmt.executeUpdate();
+            PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE raakaAine_id = ?");
+            stmt2.setInt(1, key);
+            stmt2.executeUpdate();
+            
+            stmt.close();
+            stmt2.close();
+        }
         
     }
 
@@ -104,24 +103,20 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     
     @Override
     public RaakaAine findOne(Integer key) throws SQLException {
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
-        stmt.setObject(1, key);
-
-        ResultSet rs = stmt.executeQuery();
-        boolean hasOne = rs.next();
-        if (!hasOne) {
-            return null;
+        RaakaAine a;
+        try (Connection connection = database.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+            stmt.setObject(1, key);
+            ResultSet rs = stmt.executeQuery();
+            boolean hasOne = rs.next();
+            if (!hasOne) {
+                return null;
+            }   Integer id = rs.getInt("id");
+            String nimi = rs.getString("nimi");
+            a = new RaakaAine(id, nimi);
+            rs.close();
+            stmt.close();
         }
-
-        Integer id = rs.getInt("id");
-        String nimi = rs.getString("nimi");
-
-        RaakaAine a = new RaakaAine(id, nimi);
-
-        rs.close();
-        stmt.close();
-        connection.close();
 
         return a;
     }
