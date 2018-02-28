@@ -87,7 +87,15 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
-
+            List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findByIngId(":id");
+                Integer suurin = 0;
+                for (AnnosRaakaAine a : annosAineet) {
+                    Integer järjestys = a.getJarjestys();
+                    if (järjestys >= suurin) {
+                        suurin = järjestys;
+                    }
+                }
+                map.put("suurin", suurin);
             return new ModelAndView(map, "ainesosa");
         }, new ThymeleafTemplateEngine());
 

@@ -122,5 +122,35 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         }
         return ainekset;
     } 
+
+    public List<AnnosRaakaAine> findByIngId(String id) throws SQLException {
+        Connection connection = database.getConnection();
+        List<AnnosRaakaAine> lista = new ArrayList<>();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE RaakaAine_id = ?");
+        stmt.setObject(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+        while (rs.next()) {
+            Integer tämänid = rs.getInt("id");
+            Integer annosId = rs.getInt("annosId");
+            Integer raakaAineId = rs.getInt("raakaAineId");
+            Integer jarjestys = rs.getInt("jarjestys");
+            String maara = rs.getString("maara");
+            String ohje = rs.getString("ohje");
+
+            AnnosRaakaAine o = new AnnosRaakaAine(tämänid, "nimi", annosId, raakaAineId, jarjestys, maara, ohje);
+            lista.add(o);
+        }
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return lista;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
        
 }

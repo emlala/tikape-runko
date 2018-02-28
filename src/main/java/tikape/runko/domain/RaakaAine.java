@@ -5,7 +5,6 @@
  */
 package tikape.runko.domain;
 
-import java.util.ArrayList;
 
 /**
  *
