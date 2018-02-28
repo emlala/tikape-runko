@@ -87,6 +87,7 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
+            //Tässä alla yritän löytää, kuinka monta kertaa ainesosa esiintyy smoothieissa. Jokin tässä ei toimi!
             List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findByIngId(":id");
                 Integer suurin = 0;
                 for (AnnosRaakaAine a : annosAineet) {
