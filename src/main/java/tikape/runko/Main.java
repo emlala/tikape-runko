@@ -125,9 +125,17 @@ public class Main {
 
                 Integer annosId = annosDao.findByName(req.queryParams("smoothie")).getId();
                 Integer ainesId = ainesDao.findByName(req.queryParams("raakaAine")).getId();
-
+                List<AnnosRaakaAine> smoothienAnnosRaakaAineet = annosRaakaAineDao.findBySmoothieId(annosId);
+                Integer suurin = 0;
+                for (AnnosRaakaAine a : smoothienAnnosRaakaAineet) {
+                    Integer järjestys = a.getJarjestys();
+                    if (järjestys >= suurin) {
+                        suurin = järjestys;
+                    }
+                }
+                
                 AnnosRaakaAine uusi = new AnnosRaakaAine(null, "nimi", annosId,
-                        ainesId, Integer.parseInt(req.queryParams("järjestys")),
+                        ainesId, suurin + 1,
                         req.queryParams("määrä"), req.queryParams("ohje"));
 
                 annosRaakaAineDao.saveOrUpdate(uusi);

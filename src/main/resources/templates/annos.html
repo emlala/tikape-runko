@@ -127,20 +127,17 @@
 
                 <h4>Raaka-aineet:</h4><br/>
 
-                <ul>
+                <ol>
 
                     <li th:each="ar: ${annosAineet}">
-                        <span th:text="${ar.nimi}"></span> - 
-                        <span th:text="${ar.id}"></span> - 
-
                         <!--PITÄISI OLLA JÄRJ MUKAAN JÄRJESTYKSESSÄ:-->
-                        <span th:text="${ar.jarjestys}"></span> - 
-
-                        <span th:text="${ar.maara}"></span> - 
+                        <!--<span th:text="${ar.jarjestys} + '.'"></span>  -->
+                        <span th:text="${ar.nimi} + ':'"></span> 
+                        <span th:text="${ar.maara} + ','"></span>  
                         <span th:text="${ar.ohje}"></span>
                     </li>
 
-                </ul>
+                </ol>
 
 
             </article>
