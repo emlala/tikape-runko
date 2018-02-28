@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Annos;
 import tikape.runko.domain.AnnosRaakaAine;
+import tikape.runko.domain.RaakaAine;
 
 /**
  *
@@ -27,12 +28,48 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer id = rs.getInt("id");
+        Integer annosId = rs.getInt("annosId");
+        Integer raakaAineId = rs.getInt("raakaAineId");
+        Integer jarjestys = rs.getInt("jarjestys");
+        String maara = rs.getString("maara");
+        String ohje = rs.getString("ohje");
+
+        AnnosRaakaAine o = new AnnosRaakaAine(id, "nimi", annosId, raakaAineId, jarjestys, maara, ohje);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return o;
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public List<AnnosRaakaAine> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<AnnosRaakaAine> annosRaakaAineet = new ArrayList<>();
+        
+        try(Connection conn = database.getConnection(); 
+
+        ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM AnnosRaakaAine").executeQuery()){
+            while (rs.next()) {
+                annosRaakaAineet.add(new AnnosRaakaAine(rs.getInt("id"), "nimi", rs.getInt("annosId"), rs.getInt("raakaAineId"),
+                rs.getInt("jarjestys"), rs.getString("maara"), rs.getString("ohje")));
+                //this.id = id;
+        
+            }
+        }
+        return annosRaakaAineet;
     }
 
 
@@ -59,5 +96,61 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
         return null;
     }
+    
+//    public List<Annos> findByIng(String ing){
+//        
+//    }
+    
+        public List<AnnosRaakaAine> findBySmoothieId(Integer id) throws SQLException {
+        List<AnnosRaakaAine> ainekset = new ArrayList<>();
+        
+        try (Connection conn = database.getConnection(); 
+    
+        ResultSet rs = conn.prepareStatement("SELECT DISTINCT AnnosRaakaAine.id, RaakaAine.nimi, "
+                + "AnnosRaakaAine.annos_id, AnnosRaakaAine.raakaAine_id, AnnosRaakaAine.jarjestys, "
+                + "AnnosRaakaAine.maara, AnnosRaakaAine.ohje "
+                + "FROM RaakaAine, AnnosRaakaAine, Annos "
+                + "WHERE Annos.id = " + id + " "
+                + "AND Annos.id = AnnosRaakaAine.annos_id "
+                + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id;").executeQuery()){
+            while (rs.next()) {
+                AnnosRaakaAine uusiRaakaAine = new AnnosRaakaAine(rs.getInt("id"), rs.getString("nimi"), rs.getInt("annos_id"), 
+                        rs.getInt("raakaAine_id"), rs.getInt("jarjestys"), rs.getString("maara"), rs.getString("ohje"));
+                uusiRaakaAine.setNimi(rs.getString("nimi"));
+                ainekset.add(uusiRaakaAine);
+            }
+        }
+        return ainekset;
+    } 
 
+    public List<AnnosRaakaAine> findByIngId(String id) throws SQLException {
+        Connection connection = database.getConnection();
+        List<AnnosRaakaAine> lista = new ArrayList<>();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE RaakaAine_id = ?");
+        stmt.setObject(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+        while (rs.next()) {
+            Integer tämänid = rs.getInt("id");
+            Integer annosId = rs.getInt("annosId");
+            Integer raakaAineId = rs.getInt("raakaAineId");
+            Integer jarjestys = rs.getInt("jarjestys");
+            String maara = rs.getString("maara");
+            String ohje = rs.getString("ohje");
+
+            AnnosRaakaAine o = new AnnosRaakaAine(tämänid, "nimi", annosId, raakaAineId, jarjestys, maara, ohje);
+            lista.add(o);
+        }
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return lista;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+       
 }

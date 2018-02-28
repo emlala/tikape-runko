@@ -4,41 +4,72 @@
     <head>
         <title>Raaka-aineet</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="ulkoasu.css" />
     </head>
     <body>
-        <h3>Raaka-aineet</h3>
+        <div class="container">
 
-        <ol>
-            <li th:each="aines: ${ainekset}">
-                <span th:text="${aines.nimi}"></span>
-                <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'> 
-                    <input type="submit" value="Poista"/>
+            <header>
+                <h1>Raaka-aineet</h1>
+            </header>
+
+            <nav>
+                <ul>
+                    <li><a href="../">Etusivu</a></li>
+                    <li><a href="/annokset">Luo uusi smoothie</a></li>
+                    <li><a href="/tilasto">Tilastot</a></li>
+                </ul>
+            </nav>
+
+            <article>
+                <ol>
+                    <li th:each="aines: ${ainekset}">
+                        <span th:text="${aines.nimi}"></span>
+
+                        <!--                <button onclick="confirmDelete()">Poista</button>-->
+
+                        <!--                <script>
+                                        function confrimDelete() {
+                                            var txt;
+                                            var r = confirm("Oletko varma, että haluat poistaa raaka-aineen?");
+                                            if (r == true) {
+                                                txt = "näkyyyy";
+                                                <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'>                     
+                                                </form>
+                                            } else {
+                                                txt = "Et poistanut raaka-ainetta.";
+                                            }
+                                        }
+                                        
+                                        </script>-->
+
+
+
+                        <!--tässä alla on se toimiva tapa poistoon, mutta tässä ei mahdollisuutta varmistukseen, poistaa vaan suoraan:-->
+                        <form th:action="${'ainekset/' + aines.id + '/poista'}" method='POST'> 
+                            <input type="submit" value="Poista"/>
+                        </form>                 
+                    </li>
+                </ol>
+
+                <br/>
+                <h4>Lisää uusi raaka-aine</h4>
+
+                <form method="POST" action="">
+                    <p>Raaka-aineen nimi:<br/>
+                        <input type="text" name="aine" required=""/><br/>
+                        <input type="submit" value="Lisää"/>
+                    </p>
                 </form>
-            </li>
-        </ol>
-        
-        <br/>
-        <h4>Lisää uusi raaka-aine</h4>
 
-        <form method="POST" action="">
-            Raaka-aineen nimi:<br/>
-            <input type="text" name="aine" required=""/><br/>
-            <input type="submit" value="Lisää"/>
-        </form>
-        
-        
-            
-            
-        
-
-        <ul>
-            <li>
-                <a href="/annokset">Lisää smoothieen!</a>
-            </li>
-            <li>
-                <a href="../">Smoothielistaukseen</a>
-            </li>
-        </ul>
+                <ul>
+                    <li>
+                        <a href="/annokset">Lisää smoothieen!</a>
+                    </li>
+                </ul>
+            </article>
+            <footer><p>KEKS, 2018</p></footer>
+        </div>
     </body>
 </html>
 

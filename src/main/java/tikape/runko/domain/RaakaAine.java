@@ -5,7 +5,6 @@
  */
 package tikape.runko.domain;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,17 +13,10 @@ import java.util.ArrayList;
 public class RaakaAine {
     private Integer id;
     private String nimi;
-    private ArrayList<AnnosRaakaAine> raakaAineitaAnnoksessa;
 
     public RaakaAine(Integer id, String nimi) {
         this.id = id;
         this.nimi = nimi;
-    }
-    
-    public RaakaAine(Integer id, String nimi, ArrayList<AnnosRaakaAine> raakaAineitaAnnoksessa) {
-        this.id = id;
-        this.nimi = nimi;
-        this.raakaAineitaAnnoksessa = raakaAineitaAnnoksessa;
     }
 
     public Integer getId() {
@@ -42,11 +34,4 @@ public class RaakaAine {
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
-    public ArrayList<AnnosRaakaAine> getRaakaAineitaAnnoksessa() {
-        return this.raakaAineitaAnnoksessa;
-    }
-    public void setRaakaAineitaAnnoksessa(ArrayList<AnnosRaakaAine> lista) {
-        this.raakaAineitaAnnoksessa = lista;
-    }
-
 }

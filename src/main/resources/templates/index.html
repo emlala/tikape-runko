@@ -4,33 +4,39 @@
     <head>
         <title>Smoothiearkisto</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="ulkoasu.css" />
     </head>
 
     <body>
-        <h3>Smoothiearkisto</h3>
-        <p>Tervetuloa smoothiearkistoomme! Sivustolla voit tarkastella jo olemassa
-            olevia reseptejä sekä luoda omia smoothieita.</p>
-        <br/>
-        
-        <h4> Smoothiet </h4>
-        <ol>
-            <li th:each="annos: ${annokset}">
-                <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
-            </li>
-        </ol>
+        <div class="container">
+            
+            <header>
+                <h1>Smoothiearkisto</h1>
+            </header>
+            
+            <nav>
+                <ul>
+                    <li><a href="/annokset">Luo uusi smoothie</a></li>
+                    <li><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></li>
+                    <li><a href="/tilasto">Tilastot</a></li>
+                </ul>
+            </nav>
 
-        <br/>
-        
-        <ul>
-            <li>
-                <a href="/annokset">Luo uusi smoothie!</a>
-            </li>
-            <li>
-                <a href="/ainekset">Lisää ja muokkaa raaka-aineita</a>
-            </li>
-            <li>
-                <a href="/tilasto">Tarkastele smoothieita</a>
-            </li>
-        </ul>
+            <article>
+                <p>Tervetuloa smoothiearkistoomme! Sivustolla voit tarkastella jo olemassa
+                    olevia reseptejä sekä luoda omia smoothieita.</p>
+                <br/>
+
+                <h4> Smoothiet </h4>
+                <ol>
+                    <li th:each="annos: ${annokset}">
+                        <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
+                    </li>
+                </ol>
+
+                <br/>
+            </article>
+            <footer><p>KEKS, 2018</p></footer>
+        </div>
     </body>
 </html>

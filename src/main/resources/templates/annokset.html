@@ -4,61 +4,72 @@
     <head>
         <title>Lisää smoothie</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="ulkoasu.css" />
     </head>
     <body>
-        <h3>Smoothiet!</h3>
+        <div class="container">
+            <header>
+                <h1>Smoothiet!</h1>
+            </header>
 
-        <ol>
-            <li th:each="annos: ${annokset}">
-                <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
-                <a th:href="${annos.id + '/poista'}"> (poista)</a>
-            </li>
-        </ol>
+            <nav>
+                <ul>
+                    <li><a href="../">Etusivu</a></li>
+                    <li><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></li>
+                    <li><a href="/tilasto">Tilastot</a></li>
+                </ul>
+            </nav>   
+            
+            <article>
+                <ol>
+                    <li th:each="annos: ${annokset}">
+                        <a th:href="${'/annokset/' + annos.id}"><span th:text="${annos.nimi}"></span></a>
+                        <form th:action="${'annokset/' + annos.id + '/poista'}" method='POST'> 
+                            <input type="submit" value="Poista"/>
+                        </form>  
+                    </li>
+                </ol>
 
-        <h4>Lisää uusi</h4>
+                <h4>Lisää uusi</h4>
 
-        <form method="POST" action="">
-            Smoothien nimi:<br/>
-            <input type="text" name="annos" required=""/><br/>
-            <input type="submit" value="Lisää"/>
-        </form>
+                <form method="POST" action="">
+                    <p>Smoothien nimi:<br/>
+                        <input type="text" name="annos" required=""/><br/>
+                        <input type="submit" value="Lisää"/>
+                    </p>
+                </form>
 
 
-        <form method="POST" action="">
-            Valitse smoothie:<br/>
-            <select name="smoothie" required="">
-                <option th:each="annos: ${annokset}" th:text="${annos.nimi}"></option>
-            </select>
-            <br/>
+                <form method="POST" action="">
+                    <p>Valitse smoothie:<br/>
+                        <select name="smoothie" required="">
+                            <option th:each="annos: ${annokset}" th:text="${annos.nimi}"></option>
+                        </select>
+                    </p>
 
-            Lisättävä raaka-aine:<br/>
-            <select name="raakaAine" required="">
-                <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
-            </select>
-            <ul>
-                <li>
+                    <p>
+                        Lisättävä raaka-aine:<br/>
+                        <select name="raakaAine" required="">
+                            <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
+                        </select>
+                    </p>
                     <a href="/ainekset">Puuttuuko raaka-aine?</a>
-                </li>
-            </ul>
-            <br/>
 
-            Järjestys:<br/>
-            <input type="number" name="järjestys" required=""/><br/>
+                    <p>
+                        Määrä:<br/>
+                        <input type="text" name="määrä" required=""/>
+                    </p>
 
-            Määrä:<br/>
-            <input type="text" name="määrä" required=""/><br/>
+                    <p>
+                        Ohje:<br/>
+                        <input type="text" name="ohje" required=""/><br/>
+                        <input type="submit" value="Luo"/>
+                    </p>
+                </form>
 
-            Ohje:<br/>
-            <input type="text" name="ohje" required=""/><br/>
-            <input type="submit" value="Luo"/>
-        </form>
 
-        <ul>
-            <li>
-                <a href="../">Takaisin listaukseen</a>
-            </li>
-        </ul>
-        
-
+            </article>
+            <footer><p>KEKS, 2018</p></footer>
+        </div>
     </body>
 </html>

@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-Feb-2018, 14:49:09
+    Author     : Emmi
+*/
+
+/* koko sivun taustan väri */
+/* koko sivun taustan väri */
+body {
+    background-color: #FFF8F6;
+}
+
+/* laatikko joka sisältää kaiken sivun sisällön */
+div.container {
+    width: 80%;
+    margin: auto;
+    background: #FFFFFF;
+}
+
+/* yläpalkki 
+border-radius määrittelee kulmien pyöristykset ja backgroundin linear-gradient määrittelee liukuvärin ja värisävyt*/
+
+header {
+    border-radius: 7px 7px 0px 0px;
+    padding: 1em;
+    color: white;
+    background: linear-gradient(to right, #FF6574, #FFE0BC);
+    clear: left;
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+
+}
+
+/* alapalkki, tähän ei tarvitse laittaa sisältöä html-sivuilla, 
+mutta se on hyvä olla olemassa vaikka sitten tyhjänä ulkoasun takia */
+
+footer {
+    border-radius: 0px 0px 7px 7px;
+    padding: 1em;
+    color: #000000;
+    background: linear-gradient(to right, #FF6574, #FFE0BC);
+    clear: left;
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+}
+
+/* navigaatiopalkki, sen sisältämä lista (ul) ja listan sisältämät linkit (ul a) 
+*/
+
+nav {
+    float: left;
+    max-width: 200px;
+    margin: 0;
+    padding: 1em;
+    font-family: "Helvetica", sans-serif;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul a {
+    text-decoration: none;
+}
+
+/* itse sisältölaatikko 
+jätin tähän vasemman reunaviivan jotta navin ja tämän välissä on raja, sitä voi muokata*/
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+    color: #000000;
+    margin-left: 20px;
+    font-family: "Helvetica", sans-serif;
+}
+
+
+/* linkkien tekstimuotoilu 
+'text-decoration: none' poistaa linkkien alleviivaukset */
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #C0004D;
+}
+
+a:visited {
+    color: #C0004D;
+}
+
+a:hover {
+    color: #F08873;
+}
+
+/* listojen pallurat */
+ul {
+    list-style-type: circle;
+}
