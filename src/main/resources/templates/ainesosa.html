@@ -108,7 +108,7 @@
         <div class="container">
 
             <header>
-                <h1>Ainesosa nimeltä <span th:text="${aines.nimi}">aines</span>!</h1>
+                <h1><span th:text="${aines.nimi}">aines</span>!</h1>
             </header>
 
             <nav>
@@ -122,9 +122,8 @@
             </nav>
 
             <article>
-                <p>Olet saapunut ainesosan <span th:text="${aines.nimi}">aines</span> omalle sivulle. 
-                    <span th:text="${aines.nimi}">aines</span> on ainesosana <span th:text="${suurin}">suurin</span>
-                    smoothiessa. Sivulla luettelo smoothieista, jotka sisältävät sitä.</p>
+                <p>Täällä pääset tarkastelemaan smoothieita, joissa on raaka-ainetta
+                     <span th:text="${aines.nimi}">aines</span>.
 
                 <br/>
 
