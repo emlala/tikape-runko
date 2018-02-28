@@ -9,4 +9,4 @@ Main-kansion alakansioita on kaksi; resources -kansion alta löytyvät websovell
 
 Sovelluksella voi luoda, muokata ja poistaa smoothieita, tarkastella reseptejä, tarkastella smoothieainesosia ja hakea tilastoja sille, kuinka monessa reseptissä tiettyä raaka-ainetta on käytetty. 
 
-Sovelluksen etusivulla aukeaa lista tietokantaan tallennetuista smoothieista, ja sivupalkista käyttäjä voi navigoida sovelluksen muihin ominaisuuksiin.
+Sovelluksen etusivulla aukeaa lista tietokantaan tallennetuista smoothieista ja sivupalkista käyttäjä voi navigoida sovelluksen muihin ominaisuuksiin ja takaisin etusivulle.
