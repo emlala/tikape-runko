@@ -87,16 +87,17 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
-            //Tässä alla yritän löytää, kuinka monta kertaa ainesosa esiintyy smoothieissa. Jokin tässä ei toimi!
-            List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findByIngId(":id");
-                Integer suurin = 0;
-                for (AnnosRaakaAine a : annosAineet) {
-                    Integer järjestys = a.getJarjestys();
-                    if (järjestys >= suurin) {
-                        suurin = järjestys;
-                    }
-                }
-                map.put("suurin", suurin);
+//            //Tässä alla yritän löytää, kuinka monta kertaa ainesosa esiintyy smoothieissa. Jokin tässä ei toimi!
+//            List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findByIngId(Integer.parseInt(req.params(":id")));
+//                Integer suurin = 0;
+//                for (AnnosRaakaAine a : annosAineet) {
+//                    Integer järjestys = a.getJarjestys();
+//                    if (järjestys >= suurin) {
+//                        suurin = järjestys;
+//                    }
+//                }
+//                map.put("suurin", suurin);
+//                map.put("ainekset", annosAineet);
             return new ModelAndView(map, "ainesosa");
         }, new ThymeleafTemplateEngine());
 

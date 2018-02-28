@@ -128,8 +128,9 @@
 
                 <br/>
 
-                <h4>Smoothiet:</h4><br/>
-
+                <h4>Osana <span th:text="${#lists.size(annokset)}"></span> smoothieta:</h4><br/>
+                
+                
                 <ol>
                     <li th:each="annos: ${annokset}">
                         <span th:text="${annos.nimi}"></span>

@@ -110,6 +110,10 @@ public class AnnosDao implements Dao<Annos, Integer> {
                         + "AnnosRaakaAine WHERE RaakaAine.id = " + id + " "
                         + "AND RaakaAine.id = AnnosRaakaAine.RaakaAine_id "
                         + "AND Annos.id = AnnosRaakaAine.Annos_id").executeQuery()) {
+            if (!rs.next()) {
+                return null;
+            }
+            
             while (rs.next()) {
                 annokset.add(new Annos(rs.getInt("id"), rs.getString("nimi")));
             }

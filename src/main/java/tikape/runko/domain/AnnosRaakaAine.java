@@ -20,7 +20,7 @@ public class AnnosRaakaAine {
     
     public AnnosRaakaAine(Integer id, String nimi, Integer annosId, Integer raakaAineId, Integer jarj, String maara, String ohje) {
         this.id = id;
-        this.nimi = "nimi";
+        this.nimi = nimi;
         this.annosId = annosId;
         this.raakaAineId = raakaAineId;
         this.jarjestys = jarj;
