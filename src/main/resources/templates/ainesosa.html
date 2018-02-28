@@ -130,11 +130,11 @@
                 <h4>Käytetty smoothieissa <span th:text="${#lists.size(annokset)}"></span> kertaa:</h4><br/>
 
 
-                <ol>
+                <ul>
                     <li th:each="annos: ${annokset}">
                         <span th:text="${annos.nimi}"></span>
                     </li>
-                </ol>
+                </ul>
 
             </article>
             <footer><p>KEKS, 2018</p></footer>
