@@ -84,7 +84,7 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
-            
+
             return new ModelAndView(map, "ainesosa");
         }, new ThymeleafTemplateEngine());
 
@@ -103,7 +103,7 @@ public class Main {
 
             return "";
         });
-        
+
         //raaka-aineen poistaminen annoksesta
         post("annokset/:id/poista", (req, res) -> {
 
