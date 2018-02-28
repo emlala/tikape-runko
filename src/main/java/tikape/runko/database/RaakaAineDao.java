@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.RaakaAine;
 
-/**
- *
- * @author Kaisla
- */
 public class RaakaAineDao implements Dao<RaakaAine, Integer> {
+
     private Database database;
 
     public RaakaAineDao(Database database) {
@@ -27,10 +24,9 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     @Override
     public List<RaakaAine> findAll() throws SQLException {
         List<RaakaAine> ainekset = new ArrayList<>();
-        
-        try(Connection conn = database.getConnection(); 
 
-        ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM RaakaAine").executeQuery()){
+        try (Connection conn = database.getConnection();
+                ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM RaakaAine").executeQuery()) {
             while (rs.next()) {
                 ainekset.add(new RaakaAine(rs.getInt("id"), rs.getString("nimi")));
             }
@@ -47,11 +43,11 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE raakaAine_id = ?");
             stmt2.setInt(1, key);
             stmt2.executeUpdate();
-            
+
             stmt.close();
             stmt2.close();
         }
-        
+
     }
 
     @Override
@@ -87,20 +83,19 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
     public List<RaakaAine> findBySmoothieId(Integer id) throws SQLException {
         List<RaakaAine> ainekset = new ArrayList<>();
-        
-        try(Connection conn = database.getConnection(); 
 
-        ResultSet rs = conn.prepareStatement("SELECT DISTINCT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
-                + "AnnosRaakaAine WHERE Annos.id = " + id + " "
-                + "AND Annos.id = AnnosRaakaAine.annos_id "
-                + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id").executeQuery()){
+        try (Connection conn = database.getConnection();
+                ResultSet rs = conn.prepareStatement("SELECT DISTINCT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, Annos, "
+                        + "AnnosRaakaAine WHERE Annos.id = " + id + " "
+                        + "AND Annos.id = AnnosRaakaAine.annos_id "
+                        + "AND RaakaAine.id = AnnosRaakaAine.raakaAine_id").executeQuery()) {
             while (rs.next()) {
                 ainekset.add(new RaakaAine(rs.getInt("id"), rs.getString("nimi")));
             }
         }
         return ainekset;
     }
-    
+
     @Override
     public RaakaAine findOne(Integer key) throws SQLException {
         RaakaAine a;
@@ -108,10 +103,10 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
             stmt.setObject(1, key);
             ResultSet rs = stmt.executeQuery();
-            boolean hasOne = rs.next();
-            if (!hasOne) {
+            if (!rs.next()) {
                 return null;
-            }   Integer id = rs.getInt("id");
+            }
+            Integer id = rs.getInt("id");
             String nimi = rs.getString("nimi");
             a = new RaakaAine(id, nimi);
             rs.close();
@@ -120,5 +115,5 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
         return a;
     }
- 
+
 }

@@ -9,7 +9,7 @@
 
     <body>
         <div class="container">
-            
+
             <header>
                 <h1>Tilastoja</h1>
             </header>
@@ -21,7 +21,7 @@
                     <li><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></li>
                 </ul>
             </nav>
-            
+
             <article>
                 <p>Tällä sivulla voit tarkastella smoothieita raaka-aineiden mukaan.</p>
 
@@ -33,26 +33,6 @@
                         <a th:href="${'/tilasto/' + aines.id}"><span th:text="${aines.nimi}"></span></a>                       
                     </li>
                 </ol>
-
-                <!--<h4>Hae raaka-aineen perusteella:</h4>
-                <form method="GET" action="/tilasto">
-                    <select name="haettava" required="">
-                        <option th:each="aines: ${ainekset}" th:text="${aines.nimi}"></option>
-                    </select>
-                    <input type="submit" value="Hae"/>  
-                    <ol>
-                    <li th:each="smoothiet: ${smoothiet}">
-                        
-                    </li>
-                </ol>
-                </form>
-                <ol>
-                    <li th:each="smoothiet: ${smoothiet}">
-                        <span th:text="${smoothiet.id}"></span>
-                    </li>
-                </ol>-->
-
-
             </article>
             <footer><p>KEKS, 2018</p></footer>
         </div>

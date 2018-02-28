@@ -31,7 +31,8 @@ public class AnnosDao implements Dao<Annos, Integer> {
             boolean hasOne = rs.next();
             if (!hasOne) {
                 return null;
-            }   Integer id = rs.getInt("id");
+            }
+            Integer id = rs.getInt("id");
             String nimi = rs.getString("nimi");
             o = new Annos(id, nimi);
             rs.close();
@@ -44,10 +45,9 @@ public class AnnosDao implements Dao<Annos, Integer> {
     @Override
     public List<Annos> findAll() throws SQLException {
         List<Annos> annokset = new ArrayList<>();
-        
-        try(Connection conn = database.getConnection(); 
 
-        ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM Annos").executeQuery()){
+        try (Connection conn = database.getConnection();
+                ResultSet rs = conn.prepareStatement("SELECT id, nimi FROM Annos").executeQuery()) {
             while (rs.next()) {
                 annokset.add(new Annos(rs.getInt("id"), rs.getString("nimi")));
             }
@@ -64,7 +64,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
             PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE annos_id = ?");
             stmt2.setInt(1, key);
             stmt2.executeUpdate();
-            
+
             stmt.close();
             stmt2.close();
         }
@@ -97,11 +97,11 @@ public class AnnosDao implements Dao<Annos, Integer> {
             if (!result.next()) {
                 return null;
             }
-            
+
             return new Annos(result.getInt("id"), result.getString("nimi"));
         }
-    }    
-    
+    }
+
     public List<Annos> findByRaakaAineId(Integer id) throws SQLException {
         List<Annos> annokset = new ArrayList<>();
 
@@ -113,7 +113,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
             if (!rs.next()) {
                 return null;
             }
-            
+
             while (rs.next()) {
                 annokset.add(new Annos(rs.getInt("id"), rs.getString("nimi")));
             }

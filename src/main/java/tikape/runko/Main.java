@@ -1,7 +1,5 @@
 package tikape.runko;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import spark.ModelAndView;
@@ -25,10 +23,9 @@ public class Main {
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
-        
+
         // alla oleva mÃ¤Ã¤rittelee css-tiedoston sijainnin
         staticFileLocation("/public");
-        
 
         Database database = new Database("jdbc:sqlite:smoothiet.db");
         database.init();
@@ -52,7 +49,7 @@ public class Main {
 
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
-        
+
         //nÃ¤ytÃ¤ smoothiekohtaiset ainesosat
         get("/annokset/:id", (Request req, Response res) -> {
             HashMap map = new HashMap<>();
@@ -60,7 +57,7 @@ public class Main {
             map.put("ainekset", ainesDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
             List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id")));
             //TÃ¤mÃ¤n listan voisi jÃ¤rjestÃ¤Ã¤ tÃ¤ssÃ¤ jÃ¤rjestysnumeron mukaan
-        
+
             //annosAineet.sort();
             map.put("annosAineet", annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
 
@@ -81,23 +78,12 @@ public class Main {
 
             return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
-        
+
         //nÃ¤ytÃ¤ raaka-ainekohtaiset smoothiet
         get("/tilasto/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("aines", ainesDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("annokset", annosDao.findByRaakaAineId(Integer.parseInt(req.params(":id"))));
-//            //Tässä alla yritän löytää, kuinka monta kertaa ainesosa esiintyy smoothieissa. Jokin tässä ei toimi!
-//            List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findByIngId(Integer.parseInt(req.params(":id")));
-//                Integer suurin = 0;
-//                for (AnnosRaakaAine a : annosAineet) {
-//                    Integer järjestys = a.getJarjestys();
-//                    if (järjestys >= suurin) {
-//                        suurin = järjestys;
-//                    }
-//                }
-//                map.put("suurin", suurin);
-//                map.put("ainekset", annosAineet);
             return new ModelAndView(map, "ainesosa");
         }, new ThymeleafTemplateEngine());
 
@@ -143,7 +129,7 @@ public class Main {
                         suurin = järjestys;
                     }
                 }
-                
+
                 AnnosRaakaAine uusi = new AnnosRaakaAine(null, "nimi", annosId,
                         ainesId, suurin + 1,
                         req.queryParams("määrä"), req.queryParams("ohje"));
@@ -153,6 +139,6 @@ public class Main {
 
             res.redirect("/annokset");
             return "";
-        });       
-    }               
+        });
+    }
 }

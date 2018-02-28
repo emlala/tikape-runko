@@ -5,12 +5,8 @@
  */
 package tikape.runko.domain;
 
-
-/**
- *
- * @author sperande
- */
 public class RaakaAine {
+
     private Integer id;
     private String nimi;
 

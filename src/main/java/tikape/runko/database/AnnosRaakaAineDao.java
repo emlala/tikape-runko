@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.AnnosRaakaAine;
 
-/**
- *
- * @author Kaisla
- */
 public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     private Database database;
@@ -92,9 +88,6 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         return null;
     }
 
-//    public List<Annos> findByIng(String ing){
-//        
-//    }
     public List<AnnosRaakaAine> findBySmoothieId(Integer id) throws SQLException {
         List<AnnosRaakaAine> ainekset = new ArrayList<>();
 
@@ -154,7 +147,6 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
             stmt.close();
             return lista;
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

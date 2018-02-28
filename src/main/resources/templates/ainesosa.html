@@ -124,13 +124,13 @@
             <article>
                 <p>Olet saapunut ainesosan <span th:text="${aines.nimi}">aines</span> omalle sivulle. 
                     <span th:text="${aines.nimi}">aines</span> on ainesosana <span th:text="${suurin}">suurin</span>
-                     smoothiessa. Sivulla luettelo smoothieista, jotka sisältävät sitä.</p>
+                    smoothiessa. Sivulla luettelo smoothieista, jotka sisältävät sitä.</p>
 
                 <br/>
 
                 <h4>Osana <span th:text="${#lists.size(annokset)}"></span> smoothieta:</h4><br/>
-                
-                
+
+
                 <ol>
                     <li th:each="annos: ${annokset}">
                         <span th:text="${annos.nimi}"></span>
