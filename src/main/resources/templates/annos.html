@@ -113,7 +113,7 @@
             <nav>
                 <ul>
                     <li><a href="../">Etusivu</a></li>
-                    <li><a href="/annokset">Luo uusi smoothie</a></li>
+                    <li><a href="/annokset">Lisää ja muokkaa smoothieita</a></li>
                     <li><a href="/ainekset">Lisää ja muokkaa raaka-aineita</a></li>
                     <li><a href="/tilasto">Tilastot</a></li>
                 </ul>
@@ -132,7 +132,7 @@
                     <li th:each="ar: ${annosAineet}">
                         <span th:text="${ar.nimi} + ':'"></span>
                         <ul>
-                            <li th:text="${ar.maara} + ', ' + ${ar.ohje}"> 
+                            <li th:text="${ar.maara} + ' | ' + ${ar.ohje}"> 
                             </li>
                         </ul>
                         <form th:action="${ar.id + '/poista'}" method='POST'> 

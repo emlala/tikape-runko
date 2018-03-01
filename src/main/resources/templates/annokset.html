@@ -39,9 +39,12 @@
                     </p>
                 </form>
 
+                <br/>
+
+                <h4> Lisää raaka-aineita haluamaasi smoothieen:</h4>
 
                 <form method="POST" action="">
-                    <p>Valitse smoothie:<br/>
+                    <p>Lisää smoothieen:<br/>
                         <select name="smoothie" required="">
                             <option th:each="annos: ${annokset}" th:text="${annos.nimi}"></option>
                         </select>
