@@ -56,8 +56,6 @@ public class Main {
             map.put("annos", annosDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("ainekset", ainesDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
             List<AnnosRaakaAine> annosAineet = annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id")));
-            //TÃ¤mÃ¤n listan voisi jÃ¤rjestÃ¤Ã¤ tÃ¤ssÃ¤ jÃ¤rjestysnumeron mukaan
-
             //annosAineet.sort();
             map.put("annosAineet", annosRaakaAineDao.findBySmoothieId(Integer.parseInt(req.params(":id"))));
 
