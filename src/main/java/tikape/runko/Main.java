@@ -112,7 +112,7 @@ public class Main {
         });
 
         //smoothien poistaminen
-        post("annokset/:id/poista", (req, res) -> {
+        post("annokset/:id/poistahan", (req, res) -> {
 
             annosDao.delete(Integer.parseInt(req.params(":id")));
             res.redirect("/annokset");
