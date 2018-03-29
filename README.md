@@ -1,12 +1,13 @@
-# Web-sovellus smoothietietokannalle
+# Web-application for a smoothie database
 
-Tietokantojen perusteet -kurssin ryhmätyö osa 2.
+Group project for the course Introduction to Databases.
 
-Sovellus on nähtävissä täällä: https://smoothiebar-best.herokuapp.com/
+You can view the application here: https://smoothiebar-best.herokuapp.com/
+The application is unfortunately only in Finnish.
 
-Sovelluksen koodi löytyy scr/main -kansion alta. Tiedosto smoothie.db on käytettävä tietokanta.
-Main-kansion alakansioita on kaksi; resources -kansion alta löytyvät websovelluksen html- ja css-tiedostot, ja runko-kansiosta löytyy kaikki sovelluksen javatiedostot.
+The scripts for the application can be found under scr/main. The file smoothie.db is the database itself.
+The Main folder has two subfolders: the HTML and CSS scripts for the web applcation are located under the resources folder, and the runko folder contains all of the Java scripts.
 
-Sovelluksella voi luoda, muokata ja poistaa smoothieita, tarkastella reseptejä, tarkastella smoothieainesosia ja hakea tilastoja sille, kuinka monessa reseptissä tiettyä raaka-ainetta on käytetty. 
+The application can be used for creating, editing and deleting smoothies in the database. One can view the recipes, ingredients and statistics for the ingredients. 
 
-Sovelluksen etusivulla aukeaa lista tietokantaan tallennetuista smoothieista ja sivupalkista käyttäjä voi navigoida sovelluksen muihin ominaisuuksiin ja takaisin etusivulle.
+The front page of the application lists all smoothies in the database, and the side panel contains the navigation.
